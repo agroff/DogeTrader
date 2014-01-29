@@ -1,0 +1,56 @@
+{
+    "api": {
+        "url": "/api.php",
+        "trades_url": "https://www.cryptsy.com/json.php?file=ajaxtradehistory_132.json",
+        "sell_order_url": "https://www.cryptsy.com/json.php?file=ajaxsellorderslistv2_132.json",
+        "buy_order_url": "https://www.cryptsy.com/json.php?file=ajaxbuyorderslistv2_132.json",
+        "rates_url": "http://api.bitcoincharts.com/v1/weighted_prices.json"
+    },
+
+    "cache": {
+        "path": "/cache",
+        "keep_time": 5
+    },
+
+    "price": {
+        "average_count": 10
+    },
+
+    "alarms": [
+        {
+            "id": "cash-register",
+            "name": "Cash Register",
+            "youtube": "ZeET7Z1ZGlw",
+            "description": "Cha-Ching! Much Money. So Profit.",
+            "length": 5
+        },
+        {
+            "id": "moon-party",
+            "name": "Moon Party",
+            "youtube": "21LA888yC48",
+            "description": "Celebrate Moon Progress!",
+            "length": 45
+        },
+        {
+            "id": "trombone",
+            "name": "Sad Trombone",
+            "youtube": "yJxCdh1Ps48",
+            "description": "Doge goes down? Buy more Doge!",
+            "length": 5
+        },
+        {
+            "id": "bell",
+            "name": "Ringing Bell",
+            "youtube": "Ar-l4spuNBs",
+            "description": "Bells Ringing Across the Land",
+            "length": 10
+        },
+        {
+            "id": "dog",
+            "name": "Howling Dog",
+            "youtube": "9RNNZ3e-9IA",
+            "description": "Doge Announces a price change.",
+            "length": 20
+        }
+    ]
+}
