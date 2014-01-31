@@ -5,8 +5,54 @@ body.space {
     background: url("/img/space.jpg");
 }
 
-body.space .panel{
+body.space .panel,
+body.space table,
+body.space input,
+body.space select,
+body.space table thead,
+body.space table tfoot,
+body.space span.prefix
+{
     background-color: #111;
+}
+
+body.space table tr.even,
+body.space table tr.alt,
+body.space table tr:nth-of-type(even) {
+    background: #212121;
+}
+
+body.space input[type="text"][disabled]{
+    background-color: #101010;
+}
+
+body.space,
+body.space h1,
+body.space h2,
+body.space h3,
+body.space h4,
+body.space h5,
+body.space h6,
+body.space input,
+body.space select,
+body.space table thead,
+body.space table tfoot,
+body.space table tr th,
+body.space table tr td,
+body.space span.prefix
+{
+    color: #CCC;
+}
+
+.row{
+    max-width: 73.5em;
+}
+
+.green{
+    color:#005709;
+}
+.red{
+    color:#570002;
 }
 
 .dogeCoin{
@@ -64,6 +110,8 @@ a.linkMarker{
     text-align: center;
 }
 .panel.tablePanel{
+    max-height: 360px;
+    overflow: auto;
     padding:6px;
 }
 .smallTable{
@@ -72,6 +120,9 @@ a.linkMarker{
 div.row.smallTable {
     margin:5px 0px;
     border-bottom: 1px solid #CCC;
+}
+div.row.smallTable:last-child {
+    border-bottom: none;
 }
 .smallTable.strong{
     font-weight: bold;
@@ -83,7 +134,12 @@ div.row.smallTable {
 .smallTable .columns{
     padding-bottom: 3px;
 }
-
+.a-right{
+    text-align:right;
+}
+.orderBookTable .columns{
+    text-align: right;
+}
 #tradePercentContainer,
 #buyContainer,
 #sellContainer{
@@ -94,7 +150,7 @@ div.row.smallTable {
     font-size: 90%;
 }
 .light{
-    color:#444444;
+    color:#858585;
 }
 
 #buyContainer,
@@ -105,6 +161,12 @@ div.row.smallTable {
     font-size:12px;
     float:left;
     text-align: center;
+}
+body.space #buyContainer{
+    background-color: #005709;
+}
+body.space #sellContainer{
+    background-color: #570002;
 }
 #buyContainer{
     border-top-left-radius: 5px;
@@ -150,4 +212,27 @@ div.row.smallTable {
 
 #bottomSpacer{
     height:700px;
+}
+
+#errorModal .close-reveal-modal{
+    font-size: inherit;
+    position: relative;
+    float: right;
+    color:#fff;
+}
+
+h3.errorTitle{
+    border-bottom: 1px solid #303030;
+    font-size: 20px;
+    position: absolute;
+    background-color: #444;
+    color: #fff;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    padding: 10px;
+}
+
+#errorContent{
+    margin-top:30px;
 }

@@ -15,7 +15,7 @@ class CryptsyMarket implements ProviderInterface
     public function rates()
     {
         $url = Setting::get("api.rates_url");
-        return $this->fetchUrl($url, TRUE, 60 * 60);
+        return json_encode($this->fetchUrl($url, 60 * 60));
     }
 
     public function orders()
@@ -23,25 +23,105 @@ class CryptsyMarket implements ProviderInterface
         // TODO: Implement orders() method.
     }
 
-    private function fetchUrl($url, $cache = TRUE, $cacheTime = FALSE)
+    public function all($time)
     {
+        $cacheTime = Setting::get("cache.keep_time");
 
-        $file = "";
-        if($cache)
-        {
-            $file = DOC_ROOT . Setting::get("cache.path") . "/" . md5($url);
+        $data = array(
+            "time" => time(),
+            "trades" => $this->fetchNewData("api.trades_url", $time),
+            "sells" => $this->fetchNewData("api.sell_orders_url", $time),
+            "buys" => $this->fetchNewData("api.buy_orders_url", $time),
+        );
 
-            $data = $this->getCached($file, $cacheTime);
+//        if(!isset($trades->cached)){
+//            $data["trades"] = $trades->aaData;
+//        }
+//
+//        if(!isset($sells->cached)){
+//            $data["sells"] = array_slice($sells->aaData, 0, 50);
+//        }
+//
+//        if(!isset($buys->cached)){
+//            $data["buys"] = array_slice($buys->aaData, 0, 50);
+//        }
 
-            if($data !== FALSE)
-            {
-                $data = json_decode($data);
-                //dbg($data);
-                $data->cached = true;
-                return json_encode($data);
-            }
+        return json_encode($data);
+    }
+
+    private function fetchNewData($urlName, $time){
+        $url = Setting::get($urlName);
+        $file = $this->getFileFromUrl($url);
+
+        $this->updateCache($url);
+
+        //return data if:
+        //it has been updated since $time
+        if(filemtime($file) > $time || $time === FALSE){
+            return json_decode(file_get_contents($file));
         }
 
+        return false;
+    }
+
+    private function updateCache($url)
+    {
+        $cacheTime = Setting::get("cache.keep_time");
+        $file = $this->getFileFromUrl($url);
+
+        //update cache if:
+        //current cache is old
+        //and fetched data is new
+
+        if(!$this->fileOlderThan($file, $cacheTime))
+        {
+            return;
+        }
+
+        $data = $this->fetchRawUrl($url);
+        $data = $this->adjustData($data, $url);
+
+        if($this->dataIsNew($data, $file)){
+            file_put_contents($file, $data);
+        }
+
+    }
+
+    private function dataIsNew($data, $file){
+        if(!file_exists($file)){
+            return true;
+        }
+
+        $oldData = file_get_contents($file);
+
+        if(md5($oldData) === md5($data)){
+            return false;
+        }
+
+        return true;
+    }
+
+    private function adjustData($data, $url){
+        $isBuy  = $url === Setting::get("api.buy_orders_url");
+        $isSell = $url === Setting::get("api.sell_orders_url");
+        $orderbookCount = Setting::get("api.orderbook_count");
+
+        if($isBuy || $isSell){
+            $data = json_decode($data);
+            $data->aaData = array_slice($data->aaData, 0, $orderbookCount);
+            $data = json_encode($data);
+        }
+
+        return $data;
+    }
+
+    private function getFileFromUrl($url)
+    {
+        return DOC_ROOT . Setting::get("cache.path") . "/" . md5($url);
+    }
+
+    private function fetchRawUrl($url)
+    {
         $curlSession = $this->curlHandle();
         curl_setopt($curlSession, CURLOPT_URL, $url);
         curl_setopt($curlSession, CURLOPT_BINARYTRANSFER, true);
@@ -50,23 +130,58 @@ class CryptsyMarket implements ProviderInterface
         $data = curl_exec($curlSession);
         curl_close($curlSession);
 
+        return $data;
+    }
+
+    private function fetchUrl($url, $cacheTime = FALSE)
+    {
+        $file = "";
+
+        $cache = FALSE;
+        if($cacheTime > 0){
+            $cache = TRUE;
+        }
+
+        if($cache)
+        {
+            $file = $this->getFileFromUrl($url);
+
+            $data = $this->getCached($file, $cacheTime);
+
+            if($data !== FALSE)
+            {
+                $data = json_decode($data);
+                $data->cached = true;
+                return $data;
+            }
+        }
+
+        $data = $this->fetchRawUrl($url);
+
         if($cache)
         {
             file_put_contents($file, $data);
         }
-        return $data;
+        return json_decode($data);
     }
 
+    /**
+     * Returns file contents if not expired
+     * @param      $file
+     * @param bool $cacheTime
+     *
+     * @return bool|string
+     */
     private function getCached($file, $cacheTime = FALSE)
     {
         if($cacheTime === FALSE) {
             $cacheTime = Setting::get("cache.keep_time");
         }
+
         if (file_exists($file)) {
 
-            $difference = time() - filemtime($file);
 
-            if($difference <= $cacheTime)
+            if(!$this->fileOlderThan($file, $cacheTime))
             {
                 return file_get_contents($file);
             }
@@ -75,13 +190,28 @@ class CryptsyMarket implements ProviderInterface
         return FALSE;
     }
 
+    private function fileOlderThan($file, $seconds)
+    {
+        if (! file_exists($file)) {
+            return FALSE;
+        }
+
+        $difference = time() - filemtime($file);
+
+        if($difference >= $seconds){
+            return TRUE;
+        }
+
+        return FALSE;
+    }
+
     private function curlHandle()
     {
-        static $curlHandle = null;
-        if($curlHandle === null)
-        {
-            $curlHandle = curl_init();
-        }
-        return $curlHandle;
+//        static $curlHandle = null;
+//        if($curlHandle === null)
+//        {
+//            $curlHandle = curl_init();
+//        }
+        return curl_init();
     }
 }

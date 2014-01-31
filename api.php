@@ -7,6 +7,7 @@ use Groff\Doge\ApiFactory;
 $api = ApiFactory::get("cryptsy");
 
 $method = Input::get("method");
+$time = Input::get("time");
 
 switch($method)
 {
@@ -16,6 +17,10 @@ switch($method)
 
     case "rates":
         echo $api->rates();
+        break;
+
+    case "all":
+        echo $api->all($time);
         break;
 
     case "orders":

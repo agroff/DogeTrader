@@ -17,11 +17,13 @@ $alarms = Setting::get("alarms");
 </head>
 <body>
 
+<a name="top" class="">&nbsp;</a>
+
 <div class="fixed">
     <nav class="top-bar" data-topbar>
         <ul class="title-area">
             <li class="name">
-                <h1><a href="#">DogeTrader</a></h1>
+                <h1><a href="#top">DogeTrader</a></h1>
             </li>
         </ul>
 
@@ -77,30 +79,7 @@ $alarms = Setting::get("alarms");
         </div>
     </div>
     <div class="large-12 columns">
-        <h3>
-            Alarms
-        </h3>
-
-        <div class="row">
-            <div class="large-6 columns">
-                <input type="text" placeholder="Satoshi" id="alarm-satoshi">
-
-            </div>
-            <div class="large-6 columns">
-                <select class="custom pad" id="alarm-id">
-                    <option value="">Select Sound...</option>
-                    <?php foreach ($alarms as $alarm): ?>
-                        <option value="<?php o($alarm["id"]); ?>">
-                            <?php o($alarm["name"]); ?>
-                        </option>
-                    <?php endforeach; ?>
-                </select>
-
-            </div>
-            <div class="large-6 columns">
-                <button class="small radius button" id="new-alarm" type="button">Add Alarm</button>
-            </div>
-        </div>
+        <?php view("alarm", array("alarms" => $alarms)); ?>
     </div>
 </div>
 
@@ -154,21 +133,7 @@ $alarms = Setting::get("alarms");
     </div>
 </div>
 
-
-<a name="orders" class="linkMarker">&nbsp;</a>
-
-
-<div class="row">
-    <div class="large-18 columns">
-        <h3>
-            Orders
-        </h3>
-
-        <div class="panel">
-            Orders Coming Soon...
-        </div>
-    </div>
-</div>
+<?php view("orders") ?>
 
 <a name="calculator" class="linkMarker">&nbsp;</a>
 
@@ -361,93 +326,27 @@ $alarms = Setting::get("alarms");
     Such Donations: DLHK5ra1F2gqyLRbjoASWXZCfVLX8PVViq
 </div>
 
-<?php //Begin Templates ?>
+<div id="errorModal" class="reveal-modal small" data-reveal>
+    <h3 class="errorTitle">Wow. Such Error. Very Problem.</h3>
+    <p id="errorContent">
 
-<script type="text/html" id="sellReportTemplate">
-    <p>
-        You spent
-        <span class="strong" data-content="spent"></span> BTC
-        and received
-        <span class="strong" data-content="earned"></span> BTC
     </p>
-    <p>
-        Your net gain was
-        <span class="strong" data-content="gained"></span> BTC
-        or
-        <span class="strong" data-content="gainPercent"></span> % of your initial investment.
-    </p>
-</script>
-
-<script type="text/html" id="buyTemplate">
-<div class="row smallTable">
-    <span class="hide buyId" data-content="id"></span>
-    <div class="small-5 columns" data-content="doge">
-    </div>
-    <div class="small-4 columns" data-content="satoshi">
-    </div>
-    <div class="small-6 columns" data-content="totalCost">
-    </div>
-    <div class="small-2 columns">
-        <button class="tiny radius button unbuy" type="button">X</button>
-    </div>
+    <a class="close-reveal-modal small radius button">Okay</a>
 </div>
-</script>
 
-<script type="text/html" id="transactionStatsTemplate">
-    <table class="large-18">
-        <tr>
-            <th colspan="2" data-content="title"></th>
-        </tr>
-        <tr>
-            <td class="strong">Count</td>
-            <td data-content="count"></td>
-        </tr>
-        <tr>
-            <td class="strong">Average BTC</td>
-            <td data-content="btcAverage"></td>
-        </tr>
-        <tr>
-            <td class="strong">Total BTC</td>
-            <td data-content="btcTotal"></td>
-        </tr>
-        <tr>
-            <td class="strong">Average DOGE</td>
-            <td data-content="dogeAverage"></td>
-        </tr>
-        <tr>
-            <td class="strong">Total DOGE</td>
-            <td data-content="dogeTotal"></td>
-        </tr>
-    </table>
-</script>
-
-<script type="text/html" id="transactionTemplate">
-
-    <tr>
-        <td>
-            <span class="light" data-content="date">
-            </span>
-        </td>
-        <td>
-            <span data-content="type"></span>
-            @
-            <span data-content="satoshi"></span>
-            satoshi
-        </td>
-        <td>
-            <span data-content="btc"></span>
-            BTC
-        </td>
-    </tr>
-</script>
+<?php template("transactionTemplate") ?>
+<?php template("transactionStatsTemplate") ?>
+<?php template("buyTemplate") ?>
+<?php template("alarmTemplate") ?>
+<?php template("orderTemplate") ?>
+<?php template("changeTemplate") ?>
+<?php template("triggeredAlarmTemplate") ?>
+<?php template("sellReportTemplate") ?>
 
 
 <?php //End Templates ?>
 
-<script src="js/vendor/jquery.js"></script>
-<script src="js/vendor/jquery.loadTemplate-1.3.2.min.js"></script>
-<script src="js/foundation.min.js"></script>
-<script src="js/doge/main.js"></script>
+<script src="js/doge/main.php"></script>
 <script>
     $(document).foundation();
     $(function () {

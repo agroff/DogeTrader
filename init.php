@@ -15,3 +15,23 @@ function dbg($item)
     var_dump($item);
     echo "</pre>";
 }
+
+function require_js($file)
+{
+    require(DOC_ROOT . '/js/' . $file);
+}
+
+function view($file, $data = array())
+{
+    extract($data);
+    require(DOC_ROOT . '/view/' . $file . '.php');
+}
+
+function template($id)
+{
+
+    echo '<script type="text/html" id="'.$id.'">';
+    view("template/" . $id);
+    echo '</script>';
+
+}
