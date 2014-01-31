@@ -73,7 +73,7 @@ class CryptsyMarket implements ProviderInterface
         //current cache is old
         //and fetched data is new
 
-        if(!$this->fileOlderThan($file, $cacheTime))
+        if(!$this->fileOlderThan($file, $cacheTime) && file_exists($file))
         {
             return;
         }
