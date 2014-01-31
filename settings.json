@@ -1,7 +1,7 @@
 {
     "api" : {
         "url"             : "/api.php",
-        "refresh_time"    : 3,
+        "refresh_time"    : 4,
         "trades_url"      : "https://www.cryptsy.com/json.php?file=ajaxtradehistory_132.json",
         "sell_orders_url" : "https://www.cryptsy.com/json.php?file=ajaxsellorderslistv2_132.json",
         "buy_orders_url"  : "https://www.cryptsy.com/json.php?file=ajaxbuyorderslistv2_132.json",

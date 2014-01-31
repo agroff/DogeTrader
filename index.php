@@ -36,7 +36,7 @@ $alarms = Setting::get("alarms");
                 <li class="divider"></li>
                 <li><a href="#calculator">Calculator</a></li>
                 <li class="divider"></li>
-                <li><a href="#converter">Coverter</a></li>
+                <li><a href="#converter">Converter</a></li>
                 <li class="divider"></li>
                 <li><a href="#about">About</a></li>
             </ul>
@@ -54,7 +54,9 @@ $alarms = Setting::get("alarms");
         </h1>
 
         <p class="doge">
-            A collection of utilities for trading doge. All pricing data is from Cryptsy
+            A collection of utilities for trading doge.
+            <br>
+            All market data is from Cryptsy
         </p>
 
         <button class="small radius button" id="moon-button" type="button">To The Moon!!!</button>
