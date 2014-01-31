@@ -5,7 +5,9 @@ doge.storeData = function(){
 };
 
 doge.loadData = function(){
-    doge.data = JSON.parse(localStorage["dogeData"]);
+    if(localStorage["dogeData"] != undefined){
+        doge.data = JSON.parse(localStorage["dogeData"]);
+    }
 };
 
 doge.main = function () {
