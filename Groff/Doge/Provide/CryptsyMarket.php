@@ -118,6 +118,12 @@ class CryptsyMarket implements ProviderInterface
 
         if($isBuy || $isSell){
             $data = json_decode($data);
+            
+            //something went wrong?
+            if(empty($data->aaData)){
+                return $data;
+            }
+
             $data->aaData = array_slice($data->aaData, 0, $orderbookCount);
             $data = json_encode($data);
         }
