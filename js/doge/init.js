@@ -6,6 +6,8 @@ doge = {};
 
 doge.data = {
     currentPrice : "",
+    analyzeCount : 200,
+    changeLog    : [],
     buys         : [],
     alarms       : []
 }

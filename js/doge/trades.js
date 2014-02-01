@@ -4,6 +4,8 @@
  ******************************************/
 doge.trades = {
 
+    last: [],
+
     startDate : "",
     endDate   : "",
 
@@ -126,8 +128,7 @@ doge.trades = {
     },
 
     renderAnalysis : function (transactionData) {
-        var analysis = doge.trades.doAnalysis(transactionData),
-            $buy = $("#buyContainer"),
+        var $buy = $("#buyContainer"),
             $sell = $("#sellContainer"),
             buys = doge.trades.buys,
             sells = doge.trades.sells,
@@ -169,6 +170,26 @@ doge.trades = {
         doge.trades.renderDate("tradesEnd", doge.trades.endDate);
 
         doge.trades.renderTopTrades(transactionData);
+    },
+
+    doTrimmedAnalysis: function(){
+        var data = doge.trades.last.slice(0,doge.data.analyzeCount);
+
+        doge.trades.doAnalysis(data);
+        doge.trades.renderAnalysis(data);
+    },
+
+    analyze: function(transactionData){
+        doge.trades.last = transactionData;
+        doge.trades.doTrimmedAnalysis();
+    },
+
+    bind:function(){
+        $("#analyzeCount").change(function(){
+            doge.data.analyzeCount = $(this).val();
+            doge.storeData();
+            doge.trades.doTrimmedAnalysis();
+        });
     }
 
 };

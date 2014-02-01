@@ -5,8 +5,10 @@ doge.storeData = function(){
 };
 
 doge.loadData = function(){
+    var loaded;
     if(localStorage["dogeData"] != undefined){
-        doge.data = JSON.parse(localStorage["dogeData"]);
+        loaded = JSON.parse(localStorage["dogeData"]);
+        $.extend(doge.data, loaded);
     }
 };
 
@@ -24,6 +26,13 @@ doge.main = function () {
 };
 
 doge.intialRequestFinished = function(){
+
+};
+
+doge.applyLoadedData = function(){
+    doge.alarm.render();
+    $("#analyzeCount").val(doge.data.analyzeCount);
+    doge.orders.renderLog();
 
 };
 
@@ -46,8 +55,9 @@ doge.settingsLoaded = function () {
     doge.convert.bind();
     doge.calc.bind();
     doge.alarm.bind();
+    doge.trades.bind();
     doge.api.rates();
 
     doge.loadData();
-    doge.alarm.render();
+    doge.applyLoadedData();
 };

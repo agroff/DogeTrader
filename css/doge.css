@@ -114,6 +114,42 @@ a.linkMarker{
     overflow: auto;
     padding:6px;
 }
+div.row.smallTable.removed,
+div.row.smallTable.added{
+    margin: 1px -6px;
+    padding-top: 5px;
+}
+
+div.row.smallTable.removed.big{
+    color: #fff;
+    background-color: #D80F0F;
+}
+div.row.smallTable.removed.medium{
+    background-color: #fbc7ca;
+}
+div.row.smallTable.removed.small{
+    background-color: #fbe0ef;
+}
+
+div.row.smallTable.added.big{
+
+    color: #fff;
+    background-color: #00690D;
+}
+div.row.smallTable.added.medium{
+    background-color: #89D684;
+}
+div.row.smallTable.added.small{
+    background-color: #d1fbcb;
+}
+
+div.changeBtc{
+    font-weight: bold;
+    font-size:100%;
+    padding-top:6px;
+}
+
+
 .smallTable{
     font-size:90%;
 }

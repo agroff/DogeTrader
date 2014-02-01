@@ -9,22 +9,22 @@ doge.orders = {
         sells : []
     },
 
-    changeFromIndex: function(index, order, isBuy){
+    changeFromIndex : function (index, order, isBuy) {
         var toNum = doge.utils.toNumber,
             satoshi = order.satoshi,
             orders, change;
 
-        if(isBuy){
+        if (isBuy) {
             orders = doge.orders.past.buys;
         }
         else {
             orders = doge.orders.past.sells;
         }
 
-        if(orders[index] == undefined){
+        if (orders[index] == undefined) {
             return 0;
         }
-        if(orders[index][satoshi] == undefined){
+        if (orders[index][satoshi] == undefined) {
             return 0;
         }
 
@@ -35,56 +35,80 @@ doge.orders = {
         return change;
     },
 
-    getChange: function(order, isBuy){
+    getChange : function (order, isBuy) {
         var clss = "red",
-            change = doge.orders.changeFromIndex(0, order, isBuy);;
+            change = doge.orders.changeFromIndex(0, order, isBuy);
+        ;
 
-        if(change > 0) {
+        if (change > 0) {
             clss = "green";
-            change = "+"+change;
+            change = "+" + change;
         }
-        if(change == 0){
+        if (change == 0) {
             change = "--";
             clss = "";
         }
 
-        return '<span class="'+clss+'">'+change+'</span>';
+        return '<span class="' + clss + '">' + change + '</span>';
     },
 
-    logChange: function(satoshi, btc){
-        var $log = $("#changelog"),
-            data = {
-                satoshi: satoshi,
-                btc: btc,
-                date: doge.utils.minutesAgo(new Date(), false)
+    renderLog : function () {
+        var $log = $("#changelog");
+
+        $log.html("");
+        $("#totalLogs").text(doge.data.changeLog.length);
+        $.each(doge.data.changeLog, function (i, data) {
+            var size = 'big';
+            if (data.btc < 16) {
+                size = 'medium'
+            }
+            if (data.btc < 6) {
+                size = 'small'
+            }
+
+            data.class = "row smallTable " + data.english + " " + size;
+
+            $log.loadTemplate($("#changeTemplate"), data, {prepend : true});
+        });
+    },
+
+    logChange : function (satoshi, btc) {
+        var data = {
+                satoshi : satoshi,
+                btc     : Math.abs(btc),
+                date    : doge.utils.minutesAgo(new Date(), false)
             };
 
-        dbg(satoshi);
-        dbg(btc);
-        dbg("woo");
-        data.english = "removed from";
-        if(btc > 0){
-            data.english = "added to";
+        data.english = "removed";
+        if (btc > 0) {
+            data.english = "added";
         }
 
+        doge.data.changeLog.push(data);
 
-        $log.loadTemplate($("#changeTemplate"), data, {prepend: true});
+        if (doge.data.changeLog.length > 100) {
+            doge.data.changeLog.shift();
+        }
 
+        doge.storeData();
+
+        doge.orders.renderLog();
     },
 
-    logNotableChange: function(order, isBuy){
+    logNotableChange : function (order, isBuy) {
         var change, index;
 
-        if(isBuy){
+        if (isBuy) {
             index = doge.orders.past.buys.length - 1;
         }
         else {
             index = doge.orders.past.buys.length - 1;
         }
 
-        change = doge.orders.changeFromIndex(index, order, isBuy);;
+        change = doge.orders.changeFromIndex(index, order, isBuy);
+        ;
 
-        if(Math.abs(change) >= doge.settings.orders.change_threshold) {
+        if (Math.abs(change) >= doge.settings.orders.change_threshold) {
             doge.orders.logChange(order.satoshi, change);
         }
     },
@@ -94,9 +118,9 @@ doge.orders = {
             options = {append : true},
             isBuy = false;
 
-        if(containerId == "buyOrderList") {
+        if (containerId == "buyOrderList") {
             isBuy = true;
-            options = {prepend: true};
+            options = {prepend : true};
         }
 
         orderBook.html("");

@@ -18,6 +18,16 @@
         "average_count" : 10
     },
 
+    "converter" : {
+        "other_currencies" : [
+            "EUR",
+            "GBP",
+            "AUD",
+            "CAD",
+            "CNY"
+        ]
+    },
+
     "orders" : {
         "change_threshold" : 1.9
     },

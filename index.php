@@ -68,7 +68,7 @@ $alarms = Setting::get("alarms");
 
 
 <div class="row">
-    <div class="large-6 columns">
+    <div class="large-5 columns">
         <h3>
             Last Price
         </h3>
@@ -80,60 +80,14 @@ $alarms = Setting::get("alarms");
             <div class="center doge">Satoshi</div>
         </div>
     </div>
-    <div class="large-12 columns">
+    <div class="large-13 columns">
         <?php view("alarm", array("alarms" => $alarms)); ?>
     </div>
 </div>
 
 
-<div class="row">
-    <div class="small-6 columns">
-        <h3>
-            Recent Trade Analysis
-        </h3>
-
-    </div>
-    <div class="small-6 columns">
-
-        <div class="light small pad-top">
-            200 Trades from
-            <span id="tradesStart"></span>
-            to
-            <span id="tradesEnd"></span>
-        </div>
-
-    </div>
-    <div class="small-6 columns">
-
-        <div id="tradePercentContainer">
-            <div id="buyContainer" title="Buy Percentage"></div>
-            <div id="sellContainer" title="Sell Percentage"></div>
-        </div>
-
-    </div>
-</div>
-
-<div class="row">
-    <div class="large-8 columns">
-
-
-        <table class="small large-18">
-            <thead>
-            <th colspan="3">Top 5 Trades</th>
-            </thead>
-            <tbody id="topTrades">
-
-            </tbody>
-
-        </table>
-    </div>
-    <div class="large-5 columns" id="buyStats">
-
-    </div>
-    <div class="large-5 columns" id="sellStats">
-
-    </div>
-</div>
+<a name="trades" class="linkMarker">&nbsp;</a>
+<?php view("trades") ?>
 
 <?php view("orders") ?>
 
@@ -242,50 +196,7 @@ $alarms = Setting::get("alarms");
     </div>
 </div>
 
-<a name="converter" class="linkMarker">&nbsp;</a>
-
-
-<div class="row">
-    <div class="large-18 columns">
-        <h3>
-            Converter
-        </h3>
-    </div>
-</div>
-<div class="row">
-    <div class="large-6 columns">
-        <div class="row collapse">
-            <div class="large-6 columns">
-                <span class="prefix">DOGE</span>
-            </div>
-            <div class="large-12 columns">
-                <input type="text" placeholder="Enter DOGE Amount" value="10000" id="convertDoge">
-            </div>
-        </div>
-        <div class="row collapse">
-            <div class="large-6 columns">
-                <span class="prefix">BTC</span>
-            </div>
-            <div class="large-12 columns">
-                <input type="text" disabled="true" id="convertBtc">
-            </div>
-        </div>
-        <div class="row collapse">
-            <div class="large-6 columns">
-                <span class="prefix">USD</span>
-            </div>
-            <div class="large-12 columns">
-                <input type="text" disabled="true" id="convertUsd">
-            </div>
-        </div>
-
-        <div class="center">
-            <button id="doConversion" type="button" class="small centered radius button">Convert</button>
-        </div>
-    </div>
-</div>
-</div>
-
+<?php view("converter") ?>
 
 <a name="about" class="linkMarker">&nbsp;</a>
 
@@ -342,6 +253,7 @@ $alarms = Setting::get("alarms");
 <?php template("alarmTemplate") ?>
 <?php template("orderTemplate") ?>
 <?php template("changeTemplate") ?>
+<?php template("currencyTemplate") ?>
 <?php template("triggeredAlarmTemplate") ?>
 <?php template("sellReportTemplate") ?>
 

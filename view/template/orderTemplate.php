@@ -5,8 +5,8 @@
     </div>
     <div class="small-4 columns" data-content="total">
     </div>
-    <div class="small-4 columns" data-content="cost">
-    </div>
     <div class="small-3 columns" data-content="change">
+    </div>
+    <div class="small-4 columns" data-content="cost">
     </div>
 </div>

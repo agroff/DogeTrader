@@ -9,10 +9,10 @@
     <div class="small-4 columns">
         BTC
     </div>
-    <div class="small-4 columns">
-        Cost
-    </div>
     <div class="small-3 columns">
         &#916;
+    </div>
+    <div class="small-4 columns">
+        Total
     </div>
 </div>

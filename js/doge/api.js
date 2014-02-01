@@ -50,7 +50,7 @@ doge.api.distributeResponse = function (response) {
 
     if(response.trades !== false){
         doge.lastPrice.render(response.trades.aaData);
-        doge.trades.renderAnalysis(response.trades.aaData);
+        doge.trades.analyze(response.trades.aaData);
         doge.lastPrice.rendered = true;
     }
 

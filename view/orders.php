@@ -17,6 +17,12 @@
     </div>
     <div class="large-4 columns">
 
+        <div class="light small pad-top right">
+            <br>
+            <span id="totalLogs">0</span>
+            Total
+        </div>
+
         <h5 class="light pad-top">
             Change Log
         </h5>
