@@ -46,6 +46,16 @@ class CryptsyMarket implements ProviderInterface
 //            $data["buys"] = array_slice($buys->aaData, 0, 50);
 //        }
 
+        if(!$data["trades"]){
+            $data["trades"] = false;
+        }
+        if(!$data["sells"]){
+            $data["sells"] = false;
+        }
+        if(!$data["buys"]){
+            $data["buys"] = false;
+        }
+
         return json_encode($data);
     }
 
