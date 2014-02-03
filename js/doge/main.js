@@ -25,8 +25,19 @@ doge.main = function () {
     });
 };
 
-doge.intialRequestFinished = function(){
+doge.initialRequestFinished = function(){
 
+    $("#buySat").val(doge.data.currentPrice);
+    $("#sellSat").val(doge.data.currentPrice + 1);
+    if(doge.data.buys.length === 0){
+        $("#addBuy").trigger("click");
+    }
+    else {
+        doge.calc.renderBuys();
+    }
+
+    $("#sellSat").trigger("keyup");
+    $("#convertDoge").trigger("keyup");
 };
 
 doge.applyLoadedData = function(){
@@ -40,7 +51,7 @@ doge.initialRequest = function() {
 
     doge.api.getMethod("all", function (data) {
         doge.api.distributeResponse(data);
-        doge.intialRequestFinished();
+        doge.initialRequestFinished();
 
         setTimeout(function(){
             doge.api.refresh();

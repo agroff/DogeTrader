@@ -9,6 +9,7 @@ $alarms = Setting::get("alarms");
 <head>
     <meta charset="utf-12"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Get up to date prices on dogecoin, monitor the market in real time, and convert doge to USD as dogetrader.co. To the moon!">
     <title>DogeTrader | wow </title>
     <link rel="icon" type="img/ico" href="/img/doge.png">
     <link rel="stylesheet" href="css/foundation.css"/>
@@ -94,22 +95,13 @@ $alarms = Setting::get("alarms");
 <a name="calculator" class="linkMarker">&nbsp;</a>
 
 <div class="row">
-    <div class="small-6 columns">
-        <h3>
-            Calculator
-        </h3>
+    <div class="large-6 columns">
+
     </div>
-    <div class="small-6 columns">
-        <h5>
-            Buy List
-        </h5>
+    <div class="large-6 columns">
+
     </div>
-    <div class="small-6 columns">
-        <h5>
-            Sell
-            <span id="dogeBought"></span>
-            DOGE at
-        </h5>
+    <div class="large-6 columns">
 
     </div>
 </div>
@@ -119,22 +111,26 @@ $alarms = Setting::get("alarms");
 
 
         <div class="row">
-            <div class="small-6 columns">
+            <div class="large-6 columns">
+
+                <h3>
+                    Calculator
+                </h3>
 
                 <div class="row collapse">
-                    <div class="large-6 columns">
+                    <div class="small-6 columns">
                         <span class="prefix">DOGE</span>
                     </div>
-                    <div class="large-12 columns">
+                    <div class="small-12 columns">
                         <input type="text" id="buyDoge" value="10000">
                     </div>
                 </div>
 
                 <div class="row collapse">
-                    <div class="large-6 columns">
+                    <div class="small-6 columns">
                         <span class="prefix">Sat.</span>
                     </div>
-                    <div class="large-12 columns">
+                    <div class="small-12 columns">
                         <input type="text" id="buySat">
                     </div>
                 </div>
@@ -144,7 +140,11 @@ $alarms = Setting::get("alarms");
                 </div>
 
             </div>
-            <div class="small-6 columns">
+            <div class="large-6  columns">
+
+                <h5>
+                    Buy List
+                </h5>
 
                 <div class="panel tablePanel">
 
@@ -175,7 +175,14 @@ $alarms = Setting::get("alarms");
                 </div>
 
             </div>
-            <div class="small-6 columns">
+            <div class="large-6 columns">
+
+
+                <h5>
+                    Sell
+                    <span id="dogeBought"></span>
+                    DOGE at
+                </h5>
 
                 <div class="row collapse">
                     <div class="large-6 columns">
@@ -267,5 +274,21 @@ $alarms = Setting::get("alarms");
         doge.main();
     })
 </script>
+<?php
+if(defined("ANALYTICS_UA")):
+    ?>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', '<?php o(ANALYTICS_UA) ?>', '<?php o(SITE_URL) ?>');
+        ga('send', 'pageview');
+
+    </script>
+<?php
+endif;
+?>
 </body>
 </html>

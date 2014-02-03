@@ -4,7 +4,7 @@
         Sat
     </div>
     <div class="small-5 columns">
-        DOGE
+        &#393;OGE
     </div>
     <div class="small-4 columns">
         BTC

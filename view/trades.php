@@ -1,6 +1,6 @@
 
 <div class="row">
-    <div class="small-6 columns">
+    <div class="large-6 columns">
         <div class="row">
             <div class="small-12 columns">
 
@@ -23,18 +23,30 @@
             </div>
         </div>
 
-    </div>
-    <div class="small-6 columns">
 
-        <div class="light small pad-top text-center">
-             Showing trades from
+
+    </div>
+    <div class="large-6 columns">
+
+        <div class="light small small-pad text-center">
+            Showing trades from
+            <br>
             <span id="tradesStart"></span>
             to
             <span id="tradesEnd"></span>
         </div>
 
     </div>
-    <div class="small-6 columns">
+    <div class="large-6 columns">
+
+        <div class="row">
+            <div class="light small small-9 columns">
+                Buy Percentage
+            </div>
+            <div class="light small small-9 columns text-right">
+                Sell Percentage
+            </div>
+        </div>
 
         <div id="tradePercentContainer">
             <div id="buyContainer" title="Buy Percentage"></div>
@@ -45,10 +57,10 @@
 </div>
 
 <div class="row">
-    <div class="large-8 columns">
+    <div class="large-8 small-18 columns">
 
 
-        <table class="small large-18">
+        <table class="small small-18">
             <thead>
             <th colspan="3">Top 5 Trades</th>
             </thead>
@@ -58,10 +70,10 @@
 
         </table>
     </div>
-    <div class="large-5 columns" id="buyStats">
+    <div class="small-9 large-5 columns" id="buyStats">
 
     </div>
-    <div class="large-5 columns" id="sellStats">
+    <div class="small-9 large-5 columns" id="sellStats">
 
     </div>
 </div>

@@ -26,6 +26,7 @@ body.space input[type="text"][disabled]{
     background-color: #101010;
 }
 
+
 body.space,
 body.space h1,
 body.space h2,
@@ -72,6 +73,10 @@ body.space span.prefix
     text-transform: lowercase;
     font-family: "Comic Sans MS", cursive, sans-serif;
     color: #f35536;
+}
+
+.small-pad{
+    padding: 4px;
 }
 
 .button,

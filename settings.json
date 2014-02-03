@@ -11,7 +11,7 @@
 
     "cache" : {
         "path"      : "/cache",
-        "keep_time" : 7
+        "keep_time" : 5
     },
 
     "price" : {

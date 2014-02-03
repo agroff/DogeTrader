@@ -4,6 +4,12 @@ define("DOC_ROOT", $_SERVER["DOCUMENT_ROOT"]);
 
 require_once(DOC_ROOT . "/vendor/autoload.php");
 
+$settingsFile = DOC_ROOT . "/../update/settings.php";
+
+if(file_exists($settingsFile)){
+    require_once($settingsFile);
+}
+
 function o($output)
 {
     echo htmlentities($output);
