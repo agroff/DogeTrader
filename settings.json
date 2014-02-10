@@ -5,8 +5,13 @@
         "trades_url"      : "https://www.cryptsy.com/json.php?file=ajaxtradehistory_132.json",
         "sell_orders_url" : "https://www.cryptsy.com/json.php?file=ajaxsellorderslistv2_132.json",
         "buy_orders_url"  : "https://www.cryptsy.com/json.php?file=ajaxbuyorderslistv2_132.json",
-        "rates_url"       : "http://api.bitcoincharts.com/v1/weighted_prices.json",
-        "orderbook_count" : 35
+
+        "comment"       : "Bitcoin charts has horrible data, switching to coinbase",
+        "old_rates_url" : "http://api.bitcoincharts.com/v1/weighted_prices.json",
+        "rates_url"     : "https://coinbase.com/api/v1/currencies/exchange_rates",
+
+        "rates_cache_minutes" : 10,
+        "orderbook_count"     : 35
     },
 
     "cache" : {
@@ -29,7 +34,8 @@
     },
 
     "orders" : {
-        "change_threshold" : 1.9
+        "change_threshold" : 1.9,
+        "record_count"     : 200
     },
 
     "alarms" : [

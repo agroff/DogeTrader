@@ -9,7 +9,7 @@ $alarms = Setting::get("alarms");
 <head>
     <meta charset="utf-12"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="description" content="Get up to date prices on dogecoin, monitor the market in real time, and convert doge to USD as dogetrader.co. To the moon!">
+    <meta name="description" content="Get up to date prices on dogecoin, monitor market changes in real time, convert doge to USD, GBP, and EUR at Doge Trader. To the moon!">
     <title>DogeTrader | wow </title>
     <link rel="icon" type="img/ico" href="/img/doge.png">
     <link rel="stylesheet" href="css/foundation.css"/>
@@ -209,19 +209,19 @@ $alarms = Setting::get("alarms");
 
 
 <div class="row">
-    <div class="large-18 columns">
+    <div class="large-9 columns">
         <h3>
             About
         </h3>
 
         <p>
             DogeTrader takes data from cryptsy and displays it in a (hopefully) useful way. It also offers a utility
-            to convert to USD, alarms at specified prices, and calculations of your gain/loss at various price points.
+            to convert to USD/GBP/CAD/EUR, alarms at specified prices, and calculations of your gain/loss at various price points.
         </p>
 
         <p>
             All active trade data and transaction fees are from <a href="http://cryptsy.com" target="_blank">Cryptsy</a>.
-            BTC to fiat exchange rates are courtesy of <a href="http://bitcoincharts.com/">Bitcoin Charts</a>.
+            BTC to fiat exchange rates are courtesy of <a href="https://coinbase.com">Coinbase</a>.
         </p>
 
         <p>
@@ -229,8 +229,44 @@ $alarms = Setting::get("alarms");
         </p>
 
         <p>
-            Donations are happily accepted. Donation address appears during moon celebrations.
+            Donations are happily accepted. Donation address appears during moon celebrations. Moon celebrations and
+            alarms will play sound and you can't stop it (sorry). If you really want it to go away, try refreshing the page.
         </p>
+
+        <p>
+            Until I get an email address set up at this domain, you can contact me via
+            <a href="http://www.reddit.com/user/userNameNotLongEnoug/">reddit</a>.
+        </p>
+    </div>
+    <div class="large-9 columns">
+
+        <h3>
+            Updates
+        </h3>
+
+        <h6 class="light small underlined">Feb 10, 2014</h6>
+        <p>
+            Today I switched the fiat conversions from using bitcoin charts to using coinbase. Coinbase is more expensive
+            generally but at least they're reliable. I noticed bitcoin charts was pricing 1 BTC at 87 USD which is just
+            ridiculous since the actual price was closer $650. I thought their weighted average would provide a good and
+            stable exchange agnostic price, but I was so very wrong. I highly recommend not using their API for anything.
+        </p>
+
+        <p>
+            Today I will also begin storing data for the first time in this site's history. I plan to store the price of doge
+            in both satoshi and USD and eventually provide a graph of both prices. The recent fluctuations in BTC to fiat
+            are making it more difficult to determine the true direction of DOGE as compared to fiat so I feel this feature
+            is necessary.
+        </p>
+
+        <p>
+            Some other ideas: I want to add a section with mining/halving data. I'm considering getting data from other
+            exchanges, especially vault of satoshi for direct DOGE/USD data. I am also considering text to speech monitoring
+            of the order book and change log. I also want volume in the form of BTC per 5 minutes, with alarms for high
+            volumes. If any of those sound important to you let me know and there's a higher chance I'll get around to
+            them. Doge tips also effect my motivation.
+        </p>
+
     </div>
 </div>
 

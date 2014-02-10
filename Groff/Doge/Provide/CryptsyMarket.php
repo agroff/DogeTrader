@@ -15,7 +15,8 @@ class CryptsyMarket implements ProviderInterface
     public function rates()
     {
         $url = Setting::get("api.rates_url");
-        return json_encode($this->fetchUrl($url, 60 * 60));
+        $mins = Setting::get("api.rates_cache_minutes");
+        return json_encode($this->fetchUrl($url, 60 * $mins));
     }
 
     public function orders()
@@ -114,9 +115,11 @@ class CryptsyMarket implements ProviderInterface
     private function adjustData($data, $url){
         $isBuy  = $url === Setting::get("api.buy_orders_url");
         $isSell = $url === Setting::get("api.sell_orders_url");
-        $orderbookCount = Setting::get("api.orderbook_count");
+        $isRates = $url === Setting::get("api.rates_url");
+
 
         if($isBuy || $isSell){
+            $orderbookCount = Setting::get("api.orderbook_count");
             $data = json_decode($data);
 
             //something went wrong?
@@ -128,7 +131,28 @@ class CryptsyMarket implements ProviderInterface
             $data = json_encode($data);
         }
 
+        if($isRates){
+            $data = $this->adjustCoinbaseRates($data);
+        }
+
         return $data;
+    }
+
+    private function adjustCoinbaseRates($data)
+    {
+        $data = json_decode($data, TRUE);
+        $needle = "btc_to_";
+        $newData = array();
+
+        foreach($data as $key => $value)
+        {
+            if(strpos($key, $needle) === 0){
+                $newKey = strtoupper(str_replace($needle, "", $key));
+                $newData[$newKey] = array("now" => $value);
+            }
+        }
+
+        return json_encode($newData);
     }
 
     private function getFileFromUrl($url)
@@ -173,6 +197,7 @@ class CryptsyMarket implements ProviderInterface
         }
 
         $data = $this->fetchRawUrl($url);
+        $data = $this->adjustData($data, $url);
 
         if($cache)
         {

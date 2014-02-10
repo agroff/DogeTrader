@@ -7,6 +7,12 @@ doge.convert = {
 
     getRate : function (currency) {
         var rates = doge.convert.rates[currency];
+        if (rates == undefined) {
+            return false;
+        }
+        if (rates["now"] != undefined) {
+            return rates["now"];
+        }
         if (rates["24h"] != undefined) {
             return rates["24h"];
         }

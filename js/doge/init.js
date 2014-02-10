@@ -23,5 +23,8 @@ doge.settings = {
     },
     price : {
         average_count : ""
+    },
+    orders: {
+        record_count: ""
     }
 };

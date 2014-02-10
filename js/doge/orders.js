@@ -86,7 +86,7 @@ doge.orders = {
 
         doge.data.changeLog.push(data);
 
-        if (doge.data.changeLog.length > 100) {
+        if (doge.data.changeLog.length > doge.settings.orders.record_count) {
             doge.data.changeLog.shift();
         }
 
