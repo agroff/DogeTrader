@@ -237,6 +237,29 @@ $alarms = Setting::get("alarms");
             Until I get an email address set up at this domain, you can contact me via
             <a href="http://www.reddit.com/user/userNameNotLongEnoug/">reddit</a>.
         </p>
+
+        <h3>
+            Awesome Links
+        </h3>
+        <p class="light">
+            Because with dogecoin, we're all friends
+        </p>
+        <p>
+            <a href="http://dogepay.com/" target="_blank">DogePay</a>
+            -
+            Great conversion tool which also includes price graphs.
+        </p>
+        <p>
+            <a href="http://doge.yottabyte.nu/" target="_blank">Doge.Yottabyte</a>
+            -
+            Great price monitor application with live charts and multiple exchanges.
+        </p>
+        <p>
+            <a href="http://bitcoinwisdom.com/markets/cryptsy/dogebtc" target="_blank">Bitcoin Wisdom - Doge/Cryptsy</a>
+            -
+            The most detailed and insightful doge trading monitor. I made dogetrader since I don't understand all that
+            fancy stuff.
+        </p>
     </div>
     <div class="large-9 columns">
 

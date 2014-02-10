@@ -64,7 +64,9 @@ body.space span.prefix
 .center {
     text-align: center;
 }
-
+.underlined{
+    border-bottom:1px solid;
+}
 .comic {
     font-family: "Comic Sans MS", cursive, sans-serif;
 }
