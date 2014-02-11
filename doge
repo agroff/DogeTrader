@@ -7,11 +7,16 @@ $_SERVER["DOCUMENT_ROOT"] = __DIR__;
 
 include("init.php");
 
-$host =Setting::get("database.host");
-$name =Setting::get("database.name");
+$host = Setting::get("database.host");
+$name = Setting::get("database.name");
 
-ORM::configure('mysql:host='.$host.';dbname='.$name);
-ORM::configure('username', Setting::get("database.username"));
+$username = Setting::get("database.username");
+if(defined("MYSQL_USERNAME")){
+    $username = MYSQL_USERNAME;
+}
+
+ORM::configure('mysql:host=' . $host . ';dbname=' . $name);
+ORM::configure('username', $username);
 ORM::configure('password', MYSQL_PASSWORD);
 
 $command = new Groff\Doge\Command\Main();
