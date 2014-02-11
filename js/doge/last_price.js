@@ -40,6 +40,8 @@ doge.lastPrice = {
 
         doge.data.currentPrice = lastPrice;
 
+        document.title = lastPrice + " Sat. DogeTrader | wow";
+
         this.trigger(lastPrice);
 
         $("#currentPrice").html(lastPrice);
