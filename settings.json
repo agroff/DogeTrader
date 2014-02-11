@@ -35,8 +35,8 @@
     },
 
     "orders" : {
-        "change_threshold" : 1.9,
-        "record_count"     : 200
+        "change_threshold" : 2.6,
+        "record_count"     : 140
     },
 
     "database" : {

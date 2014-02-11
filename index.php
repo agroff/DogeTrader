@@ -9,7 +9,8 @@ $alarms = Setting::get("alarms");
 <head>
     <meta charset="utf-12"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="description" content="Get up to date prices on dogecoin, monitor market changes in real time, convert doge to USD, GBP, and EUR at Doge Trader. To the moon!">
+    <meta name="description"
+          content="Get up to date prices on dogecoin, monitor market changes in real time, convert doge to USD, GBP, and EUR at Doge Trader. To the moon!">
     <title>DogeTrader | wow </title>
     <link rel="icon" type="img/ico" href="/img/doge.png">
     <link rel="stylesheet" href="css/foundation.css"/>
@@ -91,6 +92,20 @@ $alarms = Setting::get("alarms");
 <?php view("trades") ?>
 
 <?php view("orders") ?>
+
+<a name="graph" class="linkMarker">&nbsp;</a>
+
+
+<div class="row">
+    <div class="large-18 columns" id="graphContainer" style="position: relative;">
+
+        <h3>
+            Trends
+        </h3>
+        
+        <div id="graph" class="aGraph" ></div>
+    </div>
+</div>
 
 <a name="calculator" class="linkMarker">&nbsp;</a>
 
@@ -216,7 +231,8 @@ $alarms = Setting::get("alarms");
 
         <p>
             DogeTrader takes data from cryptsy and displays it in a (hopefully) useful way. It also offers a utility
-            to convert to USD/GBP/CAD/EUR, alarms at specified prices, and calculations of your gain/loss at various price points.
+            to convert to USD/GBP/CAD/EUR, alarms at specified prices, and calculations of your gain/loss at various
+            price points.
         </p>
 
         <p>
@@ -230,7 +246,8 @@ $alarms = Setting::get("alarms");
 
         <p>
             Donations are happily accepted. Donation address appears during moon celebrations. Moon celebrations and
-            alarms will play sound and you can't stop it (sorry). If you really want it to go away, try refreshing the page.
+            alarms will play sound and you can't stop it (sorry). If you really want it to go away, try refreshing the
+            page.
         </p>
 
         <p>
@@ -241,19 +258,23 @@ $alarms = Setting::get("alarms");
         <h3>
             Awesome Links
         </h3>
+
         <p class="light">
             Because with dogecoin, we're all friends
         </p>
+
         <p>
             <a href="http://dogepay.com/" target="_blank">DogePay</a>
             -
             Great conversion tool which also includes price graphs.
         </p>
+
         <p>
             <a href="http://doge.yottabyte.nu/" target="_blank">Doge.Yottabyte</a>
             -
             Great price monitor application with live charts and multiple exchanges.
         </p>
+
         <p>
             <a href="http://bitcoinwisdom.com/markets/cryptsy/dogebtc" target="_blank">Bitcoin Wisdom - Doge/Cryptsy</a>
             -
@@ -268,23 +289,30 @@ $alarms = Setting::get("alarms");
         </h3>
 
         <h6 class="light small underlined">Feb 10, 2014</h6>
+
         <p>
-            Today I switched the fiat conversions from using bitcoin charts to using coinbase. Coinbase is more expensive
+            Today I switched the fiat conversions from using bitcoin charts to using coinbase. Coinbase is more
+            expensive
             generally but at least they're reliable. I noticed bitcoin charts was pricing 1 BTC at 87 USD which is just
             ridiculous since the actual price was closer $650. I thought their weighted average would provide a good and
-            stable exchange agnostic price, but I was so very wrong. I highly recommend not using their API for anything.
+            stable exchange agnostic price, but I was so very wrong. I highly recommend not using their API for
+            anything.
         </p>
 
         <p>
-            Today I will also begin storing data for the first time in this site's history. I plan to store the price of doge
-            in both satoshi and USD and eventually provide a graph of both prices. The recent fluctuations in BTC to fiat
-            are making it more difficult to determine the true direction of DOGE as compared to fiat so I feel this feature
+            Today I will also begin storing data for the first time in this site's history. I plan to store the price of
+            doge
+            in both satoshi and USD and eventually provide a graph of both prices. The recent fluctuations in BTC to
+            fiat
+            are making it more difficult to determine the true direction of DOGE as compared to fiat so I feel this
+            feature
             is necessary.
         </p>
 
         <p>
             Some other ideas: I want to add a section with mining/halving data. I'm considering getting data from other
-            exchanges, especially vault of satoshi for direct DOGE/USD data. I am also considering text to speech monitoring
+            exchanges, especially vault of satoshi for direct DOGE/USD data. I am also considering text to speech
+            monitoring
             of the order book and change log. I also want volume in the form of BTC per 5 minutes, with alarms for high
             volumes. If any of those sound important to you let me know and there's a higher chance I'll get around to
             them. Doge tips also effect my motivation.
@@ -307,6 +335,7 @@ $alarms = Setting::get("alarms");
 
 <div id="errorModal" class="reveal-modal small" data-reveal>
     <h3 class="errorTitle">Wow. Such Error. Very Problem.</h3>
+
     <p id="errorContent">
 
     </p>
@@ -326,6 +355,7 @@ $alarms = Setting::get("alarms");
 
 <?php //End Templates ?>
 
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script src="js/doge/main.php"></script>
 <script>
     $(document).foundation();
@@ -334,13 +364,20 @@ $alarms = Setting::get("alarms");
     })
 </script>
 <?php
-if(defined("ANALYTICS_UA")):
+if (defined("ANALYTICS_UA")):
     ?>
     <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
         ga('create', '<?php o(ANALYTICS_UA) ?>', '<?php o(SITE_URL) ?>');
         ga('send', 'pageview');

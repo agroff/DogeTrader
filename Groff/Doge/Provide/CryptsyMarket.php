@@ -2,6 +2,7 @@
 
 
 use Groff\Doge\Setting;
+use \ORM;
 
 class CryptsyMarket implements ProviderInterface
 {
@@ -55,6 +56,24 @@ class CryptsyMarket implements ProviderInterface
 //        list($zero, $satoshi) = explode('.', $btc);
 //        $satoshi = intval($satoshi);
 //        return $satoshi;
+    }
+
+    public function graph($days)
+    {
+        $time = sqlDate("-".$days." days");
+        $results = array(
+            "cryptsy" => array(),
+            "vos" => array(),
+            "coinbase" => array(),
+        );
+        $price = ORM::for_table('price')->where_gt('time', $time)->find_array();
+//        dbg($price);
+//        return;
+        foreach($price as $result)
+        {
+            $results[$result["source"]][] = $result;
+        }
+        return json_encode($results);
     }
 
     public function all($time)

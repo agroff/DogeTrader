@@ -10,6 +10,7 @@ require_js("doge/init.js");
 require_js("doge/utils.js");
 require_js("doge/api.js");
 require_js("doge/calculator.js");
+require_js("doge/graph.js");
 require_js("doge/alarm.js");
 require_js("doge/converter.js");
 require_js("doge/trades.js");

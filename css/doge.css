@@ -96,6 +96,69 @@ body.space span.prefix
 .strong{
     font-weight:bold;
 }
+rect.overlay{
+    opacity: 0.04;
+}
+rect.legend{
+    fill:#fff;
+    stroke: #CCC;
+    stroke-width:1;
+}
+
+.legendText{
+    font-size: 13px;
+}
+.legendSourceText{
+    font-size: 12px;
+    fill:#444;
+}
+
+path {
+    stroke: steelblue;
+    stroke-width: 2;
+    fill: none;
+}
+g.coinbase circle,
+circle.coinbase{
+    fill: #022fff;
+}
+path.coinbase{
+    stroke: #022fff;
+}
+g.vos circle,
+circle.vos{
+    fill: #3e84ff;
+}
+path.vos{
+    stroke: #3e84ff;
+}
+g.cryptsy circle,
+circle.cryptsy{
+    fill: #ff4c11;
+}
+path.cryptsy{
+    stroke: #ff4c11;
+}
+.axis {
+    shape-rendering: crispEdges;
+}
+
+.x.axis line {
+    stroke: lightgrey;
+}
+
+.x.axis .minor {
+    stroke-opacity: .5;
+}
+
+.x.axis path {
+    display: none;
+}
+
+.y.axis line, .y.axis path {
+    fill: none;
+    stroke: #000;
+}
 
 .button.tiny{
     font-size: 10px;

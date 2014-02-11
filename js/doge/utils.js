@@ -80,11 +80,17 @@ doge.utils = {
         return hours + ':' + m + s + " " + am;
     },
 
-    fixCryptsyDate : function (cryptsyDate) {
-        var d = new Date(cryptsyDate),
-            offset = d.getTimezoneOffset() / 60;
-        d.setHours(d.getHours() + 5 - offset);
+    fixDate: function(d, hours){
+        var offset = d.getTimezoneOffset() / 60,
+            hours = hours || 5;
+        d.setHours(d.getHours() + hours - offset);
         return d;
+    },
+
+    fixCryptsyDate : function (cryptsyDate) {
+        var d = new Date(cryptsyDate);
+
+        return doge.utils.fixDate(d);
         //return "<br />" + d.toTimeString() + " <br /> " + cryptsyDate;
     },
 

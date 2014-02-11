@@ -4,11 +4,27 @@ define("DOC_ROOT", $_SERVER["DOCUMENT_ROOT"]);
 
 require_once(DOC_ROOT . "/vendor/autoload.php");
 
+use \Groff\Doge\Setting;
+
 $settingsFile = DOC_ROOT . "/../update/settings.php";
 
 if(file_exists($settingsFile)){
     require_once($settingsFile);
 }
+
+
+$host = Setting::get("database.host");
+$name = Setting::get("database.name");
+
+$username = Setting::get("database.username");
+if(defined("MYSQL_USERNAME")){
+    $username = MYSQL_USERNAME;
+}
+
+ORM::configure('mysql:host=' . $host . ';dbname=' . $name);
+ORM::configure('username', $username);
+ORM::configure('password', MYSQL_PASSWORD);
+
 
 function o($output)
 {

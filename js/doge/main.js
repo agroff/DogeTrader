@@ -66,6 +66,7 @@ doge.settingsLoaded = function () {
     doge.convert.bind();
     doge.calc.bind();
     doge.alarm.bind();
+    doge.graph.fetch();
     doge.trades.bind();
     doge.api.rates();
 
