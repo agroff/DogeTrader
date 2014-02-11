@@ -1,0 +1,20 @@
+#!/usr/bin/env php
+<?php
+
+use \Groff\Doge\Setting;
+
+$_SERVER["DOCUMENT_ROOT"] = __DIR__;
+
+include("init.php");
+
+$host =Setting::get("database.host");
+$name =Setting::get("database.name");
+
+ORM::configure('mysql:host='.$host.';dbname='.$name);
+ORM::configure('username', Setting::get("database.username"));
+ORM::configure('password', MYSQL_PASSWORD);
+
+$command = new Groff\Doge\Command\Main();
+$status = $command->run();
+
+exit($status);

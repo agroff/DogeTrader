@@ -15,6 +15,15 @@ function o($output)
     echo htmlentities($output);
 }
 
+function cdbg($item){
+
+    if(is_array($item) || is_object($item))
+    {
+        return print_r($item);
+    }
+
+    echo $item . "\n";
+}
 function dbg($item)
 {
     echo "<pre>";
@@ -31,6 +40,12 @@ function view($file, $data = array())
 {
     extract($data);
     require(DOC_ROOT . '/view/' . $file . '.php');
+}
+
+function sqlDate($date = 'now')
+{
+    $time = strtotime($date);
+    return date('Y-m-d H:i:s', $time);
 }
 
 function template($id)

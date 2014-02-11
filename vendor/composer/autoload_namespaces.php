@@ -6,5 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Groff' => array($baseDir . '/'),
+    'Groff' => array($baseDir . '/', $vendorDir . '/groff/command/src'),
 );

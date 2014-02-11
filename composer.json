@@ -13,7 +13,9 @@
         }
     ],
     "require" : {
-        "php" : ">=5.3.0"
+        "php" : ">=5.3.0",
+        "groff/command": "dev-master",
+        "j4mie/idiorm": "dev-master"
     },
     "autoload": {
         "psr-0": {

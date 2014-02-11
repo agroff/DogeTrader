@@ -24,6 +24,39 @@ class CryptsyMarket implements ProviderInterface
         // TODO: Implement orders() method.
     }
 
+    public function cryptsyPrice()
+    {
+        $url = Setting::get("api.trades_url");
+        $trades = $this->fetchUrl($url, 60);
+        $first = array_shift($trades->aaData);
+        $btc = $first[2];
+        list($zero, $satoshi) = explode('.', $btc);
+        $satoshi = intval($satoshi);
+        return $satoshi;
+    }
+
+    public function btcToUsd()
+    {
+        $url = Setting::get("api.rates_url");
+        $data = $this->fetchUrl($url, 60 * 4);
+
+        $btc = $data->USD->now;
+        return $btc;
+    }
+
+    public function vosPrice()
+    {
+        $url = Setting::get("api.vos_trades_url");
+        $orders = $this->fetchUrl($url, 60);
+        $buy = $orders->data->bids[0];
+        return $buy->price->value_int;
+//        $first = array_shift($trades->aaData);
+//        $btc = $first[2];
+//        list($zero, $satoshi) = explode('.', $btc);
+//        $satoshi = intval($satoshi);
+//        return $satoshi;
+    }
+
     public function all($time)
     {
         $cacheTime = Setting::get("cache.keep_time");

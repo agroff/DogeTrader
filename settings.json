@@ -3,6 +3,7 @@
         "url"             : "/api.php",
         "refresh_time"    : 4,
         "trades_url"      : "https://www.cryptsy.com/json.php?file=ajaxtradehistory_132.json",
+        "vos_trades_url"  : "https://api.vaultofsatoshi.com/public/orderbook?order_currency=DOGE&payment_currency=USD&round=5&count=2",
         "sell_orders_url" : "https://www.cryptsy.com/json.php?file=ajaxsellorderslistv2_132.json",
         "buy_orders_url"  : "https://www.cryptsy.com/json.php?file=ajaxbuyorderslistv2_132.json",
 
@@ -36,6 +37,13 @@
     "orders" : {
         "change_threshold" : 1.9,
         "record_count"     : 200
+    },
+
+    "database" : {
+        "host"     : "localhost",
+        "name"     : "doge_trader",
+        "username" : "root",
+        "password" : "Nope."
     },
 
     "alarms" : [
