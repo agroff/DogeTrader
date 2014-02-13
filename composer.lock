@@ -11,12 +11,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/agroff/Command.git",
-                "reference": "26d17c1d9f758c8bf0c87af6caeb7c9c476b8163"
+                "reference": "114f05b2e85258bc6ad01a526ae80a320914eb14"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/agroff/Command/zipball/26d17c1d9f758c8bf0c87af6caeb7c9c476b8163",
-                "reference": "26d17c1d9f758c8bf0c87af6caeb7c9c476b8163",
+                "url": "https://api.github.com/repos/agroff/Command/zipball/114f05b2e85258bc6ad01a526ae80a320914eb14",
+                "reference": "114f05b2e85258bc6ad01a526ae80a320914eb14",
                 "shasum": ""
             },
             "require": {
@@ -46,7 +46,7 @@
                 "command",
                 "command line"
             ],
-            "time": "2013-12-17 04:07:41"
+            "time": "2014-02-10 21:45:53"
         },
         {
             "name": "j4mie/idiorm",

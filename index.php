@@ -102,7 +102,7 @@ $alarms = Setting::get("alarms");
         <h3>
             Trends
 
-            <select id="graphPeriod" class="small-4">
+            <select id="graphPeriod" class="small-5 large-3">
                 <option value=".1">Last 2.5 Hours</option>
                 <option value=".25">Last 6 Hours</option>
                 <option value=".5">Last 12 Hours</option>
@@ -110,6 +110,11 @@ $alarms = Setting::get("alarms");
                 <option value="2">Last 2 Days</option>
                 <option value="7">Last 7 Days</option>
                 <option value="30">Last 30 Days</option>
+            </select>
+            <select id="graphStyle" class="small-5 large-3">
+                <option value="linear">Style: Straight</option>
+                <option value="cardinal" selected="true">Style: Smooth</option>
+                <option value="basis">Style: Very Smooth</option>
             </select>
 
             <a class="tiny right radius button graphToggle cryptsy">

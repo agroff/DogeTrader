@@ -7,6 +7,7 @@ doge.graph = {
 
     bind : function () {
         $("#graphPeriod").change(doge.graph.update);
+        $("#graphStyle").change(doge.graph.update);
         $(".graphToggle").click(function(){
             var bttn = $(this),
                 clss = doge.graph.getButtonPathClass(bttn);
@@ -47,15 +48,32 @@ doge.graph = {
     },
 
     fetch : function () {
+        var d = new Date(),
+            s  = d.getSeconds(),
+            nextMinute = 60 - s,
+            timeout  = nextMinute + 10;
+
         doge.graph.bind();
-        doge.graph.doUpdates();
+        //initially, we want to update the graph ten seconds after the minute, then every minute we will check if an update is needed
+        doge.graph.doUpdates(timeout * 1000);
+        $("#graph").html("<h3 >Loading...<h3>");
+        doge.graph.update();
     },
 
-    doUpdates: function(){
-        var ms = 5 * 60 * 1000;
+    doUpdates: function(ms){
+        var ms = ms || 60 * 1000,
+            d = new Date(),
+            mins = d.getMinutes(),
+            updateMins = doge.settings.graph.update_minutes;
 
-        doge.graph.update();
 
+        if(mins % updateMins == 0){
+            dbg("updating!");
+            doge.graph.update();
+        }
+        else {
+            dbg("no update needed");
+        }
         setTimeout(doge.graph.doUpdates, ms);
     },
 
@@ -70,7 +88,6 @@ doge.graph = {
 
     update : function () {
         var days = $("#graphPeriod").val();
-        $("#graph").html("<h3 >Loading...<h3>");
 
         doge.api.getMethod({method : "graph", days : days}, function (data) {
             $("#graph").html("");
@@ -86,7 +103,7 @@ doge.graph = {
         // create a line function that can convert data[] into x and y points
         var line = d3.svg.line()
 //            .interpolate("basis")
-            .interpolate("cardinal")
+            .interpolate($("#graphStyle").val())
             // assign the X function to plot our line as we wish
             .x(function (d, i) {
                 // verbose logging to show what's actually being done
