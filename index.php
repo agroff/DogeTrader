@@ -103,7 +103,7 @@ $alarms = Setting::get("alarms");
             Trends
 
             <select id="graphPeriod" class="small-4">
-                <option value=".13">Last 3 Hours</option>
+                <option value=".1">Last 2.5 Hours</option>
                 <option value=".25">Last 6 Hours</option>
                 <option value=".5">Last 12 Hours</option>
                 <option value="1" selected="true">Last Day</option>
@@ -111,6 +111,19 @@ $alarms = Setting::get("alarms");
                 <option value="7">Last 7 Days</option>
                 <option value="30">Last 30 Days</option>
             </select>
+
+            <a class="tiny right radius button graphToggle cryptsy">
+                <div class="dot"></div>
+                <span>Cryptsy (Sat)</span>
+            </a>
+            <a class="tiny right radius button graphToggle vos">
+                <div class="dot"></div>
+                <span>Vault of Satoshi (mC)</span>
+            </a>
+            <a class="tiny right radius button graphToggle coinbase">
+                <div class="dot"></div>
+                <span>Cryptsy + Coinbase (Mc)</span>
+            </a>
 
         </h3>
         

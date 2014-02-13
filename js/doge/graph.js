@@ -7,6 +7,43 @@ doge.graph = {
 
     bind : function () {
         $("#graphPeriod").change(doge.graph.update);
+        $(".graphToggle").click(function(){
+            var bttn = $(this),
+                clss = doge.graph.getButtonPathClass(bttn);
+
+            if(bttn.hasClass("secondary")){
+                bttn.removeClass("secondary");
+            }
+            else {
+                bttn.addClass("secondary");
+            }
+
+            doge.graph.applyButtonState(bttn, clss);
+        });
+    },
+
+    getButtonPathClass: function(bttn){
+        var clss = "coinbase";
+
+        if(bttn.hasClass("vos")){
+            clss = "vos";
+        }
+        if(bttn.hasClass("cryptsy")){
+            clss = "cryptsy";
+        }
+
+        return clss;
+    },
+
+    applyButtonState: function(bttn, pathClass){
+
+        if(bttn.hasClass("secondary")){
+            d3.select("path."+pathClass).classed("faded", true);
+        }
+        else {
+            d3.select("path."+pathClass).classed("faded", false);
+        }
+
     },
 
     fetch : function () {
@@ -22,13 +59,24 @@ doge.graph = {
         setTimeout(doge.graph.doUpdates, ms);
     },
 
+    renderButtonStates: function(){
+        $(".graphToggle").each(function(){
+            var bttn = $(this),
+                clss = doge.graph.getButtonPathClass(bttn);
+
+            doge.graph.applyButtonState(bttn, clss);
+        });
+    },
+
     update : function () {
         var days = $("#graphPeriod").val();
         $("#graph").html("<h3 >Loading...<h3>");
+
         doge.api.getMethod({method : "graph", days : days}, function (data) {
             $("#graph").html("");
             doge.graph.textY = 20;
             doge.graph.render(data);
+            doge.graph.renderButtonStates();
         })
     },
 
@@ -42,15 +90,11 @@ doge.graph = {
             // assign the X function to plot our line as we wish
             .x(function (d, i) {
                 // verbose logging to show what's actually being done
-                //                dbg("X Value: ");
-                //                dbg(x(d.time));
                 // return the X coordinate where we want to plot this datapoint
                 return xScale(d.time);
             })
             .y(function (d) {
                 // verbose logging to show what's actually being done
-                //                dbg("Y Value: ");
-                //                dbg(y(d.value));
                 // return the Y coordinate where we want to plot this datapoint
                 return yScale(d.value);
             });
@@ -73,7 +117,6 @@ doge.graph = {
         //lovely to int hack
         domain.push((val - 0) + 5);
 
-        dbg(domain);
 
         return domain;
     },
