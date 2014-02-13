@@ -113,6 +113,15 @@ rect.legend{
     fill:#444;
 }
 
+g.y.axis{
+    font-size: 13px;
+    fill: #ff4c11;
+}
+g.y.axis.usd{
+    fill: #022fff;
+}
+
+
 path {
     stroke: steelblue;
     stroke-width: 2;
@@ -155,9 +164,14 @@ path.cryptsy{
     display: none;
 }
 
+.x.axis text{
+    fill: #606060;
+    font-size:13px;
+}
+
 .y.axis line, .y.axis path {
     fill: none;
-    stroke: #000;
+    stroke: #9B9B9B;
 }
 
 .button.tiny{

@@ -5,8 +5,29 @@ doge.graph = {
 
     textY : 20,
 
+    bind : function () {
+        $("#graphPeriod").change(doge.graph.update);
+    },
+
     fetch : function () {
-        doge.api.getMethod({method : "graph", days : 1}, function (data) {
+        doge.graph.bind();
+        doge.graph.doUpdates();
+    },
+
+    doUpdates: function(){
+        var ms = 5 * 60 * 1000;
+
+        doge.graph.update();
+
+        setTimeout(doge.graph.doUpdates, ms);
+    },
+
+    update : function () {
+        var days = $("#graphPeriod").val();
+        $("#graph").html("<h3 >Loading...<h3>");
+        doge.api.getMethod({method : "graph", days : days}, function (data) {
+            $("#graph").html("");
+            doge.graph.textY = 20;
             doge.graph.render(data);
         })
     },
@@ -16,6 +37,8 @@ doge.graph = {
 
         // create a line function that can convert data[] into x and y points
         var line = d3.svg.line()
+//            .interpolate("basis")
+            .interpolate("cardinal")
             // assign the X function to plot our line as we wish
             .x(function (d, i) {
                 // verbose logging to show what's actually being done
@@ -158,8 +181,6 @@ doge.graph = {
         var cryptsy = doge.graph.fixDate(data["cryptsy"], parseDate);
         var vos = doge.graph.fixDate(data["vos"], parseDate);
 
-        //data = [3, 6, 2, 7, 5, 2, 0, 3, 8, 9, 2, 5, 9, 3, 6, 3, 6, 2, 7, 5, 2, 1, 3, 8, 9, 2, 5, 9, 2, 7];
-
 
         // X scale will fit all values from data[] within pixels 0-w
         var x = d3.time.scale().domain(d3.extent(coinbase, function (d) { return d.time; })).range([0, w]);
@@ -186,6 +207,7 @@ doge.graph = {
 
         // create yAxis
         var xAxis = d3.svg.axis().scale(x).tickSize(-h).tickSubdivide(true);
+            //.tickFormat(d3.time.format("%Y-%m-%d"));
         // Add the x-axis.
         graph.append("svg:g")
             .attr("class", "x axis")
@@ -198,7 +220,7 @@ doge.graph = {
         var yAxisRight = d3.svg.axis().scale(satY).ticks(4).orient("right").tickFormat(function (d) { return d + ' Sat.'; });
         // Add the y-axis to the left
         graph.append("svg:g")
-            .attr("class", "y axis")
+            .attr("class", "y axis usd")
             .attr("transform", "translate(-10,0)")
             .call(yAxisLeft);
 
@@ -264,9 +286,10 @@ doge.graph = {
                 cryptsyPrice = cryptsy[i],
                 coinbasePrice = coinbase[i];
 
-            var xPos = (x(vosPrice.time) + 1);
+            var xPos = (x(vosPrice.time) + 10);
             if( (xPos + rectWidth) > w){
                 xPos -= rectWidth;
+                xPos -= 20;
             }
 
             dateText.text(formatDate(vosPrice.time));

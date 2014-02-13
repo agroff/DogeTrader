@@ -39,6 +39,10 @@
         "record_count"     : 140
     },
 
+    "graph" : {
+        "max_data_points" : 100
+    },
+
     "database" : {
         "host"     : "localhost",
         "name"     : "doge_trader",

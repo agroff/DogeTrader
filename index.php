@@ -101,6 +101,17 @@ $alarms = Setting::get("alarms");
 
         <h3>
             Trends
+
+            <select id="graphPeriod" class="small-4">
+                <option value=".13">Last 3 Hours</option>
+                <option value=".25">Last 6 Hours</option>
+                <option value=".5">Last 12 Hours</option>
+                <option value="1" selected="true">Last Day</option>
+                <option value="2">Last 2 Days</option>
+                <option value="7">Last 7 Days</option>
+                <option value="30">Last 30 Days</option>
+            </select>
+
         </h3>
         
         <div id="graph" class="aGraph" ></div>
@@ -259,25 +270,22 @@ $alarms = Setting::get("alarms");
             Awesome Links
         </h3>
 
-        <p class="light">
-            Because with dogecoin, we're all friends
-        </p>
 
         <p>
             <a href="http://dogepay.com/" target="_blank">DogePay</a>
-            -
+            <br>
             Great conversion tool which also includes price graphs.
         </p>
 
         <p>
             <a href="http://doge.yottabyte.nu/" target="_blank">Doge.Yottabyte</a>
-            -
+            <br>
             Great price monitor application with live charts and multiple exchanges.
         </p>
 
         <p>
             <a href="http://bitcoinwisdom.com/markets/cryptsy/dogebtc" target="_blank">Bitcoin Wisdom - Doge/Cryptsy</a>
-            -
+            <br>
             The most detailed and insightful doge trading monitor. I made dogetrader since I don't understand all that
             fancy stuff.
         </p>
@@ -287,6 +295,13 @@ $alarms = Setting::get("alarms");
         <h3>
             Updates
         </h3>
+
+        <h6 class="light small underlined">Feb 13, 2014</h6>
+        <p>
+            The historical graph of price in satoshi and two different measures of USD has been added. A feature to
+            select the time range was also added. Only a day and a half of data is available at this point so older
+            reports won't be complete.
+        </p>
 
         <h6 class="light small underlined">Feb 10, 2014</h6>
 
