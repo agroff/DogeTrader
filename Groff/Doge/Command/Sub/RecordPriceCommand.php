@@ -4,6 +4,7 @@ use Groff\Doge\ApiFactory;
 use Groff\Command\Command;
 use Groff\Command\Option;
 use Groff\Doge\Provide\CryptsyMarket;
+use Groff\Doge\Setting;
 use \ORM;
 
 /**
@@ -25,7 +26,11 @@ class RecordPriceCommand extends Command
     {
         $force = $this->option("force");
         $mins = intval(date("i"));
-        if($mins % 5 !== 0 && $force != true){
+
+        $settingTime = Setting::get("graph.update_minutes");
+        if($mins % $settingTime !== 0 && $force != true){
+            $this->output("Not Time for update...");
+            $this->output("Modulus not zero: " . $mins % $settingTime);
             return;
         }
         /** @var CryptsyMarket $api */

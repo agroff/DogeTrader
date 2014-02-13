@@ -40,7 +40,8 @@
     },
 
     "graph" : {
-        "max_data_points" : 100
+        "max_data_points" : 100,
+        "update_minutes" : 3
     },
 
     "database" : {
