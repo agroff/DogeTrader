@@ -1,8 +1,16 @@
 <?php
 require_once("init.php");
 use \Groff\Doge\Setting;
+use \Groff\Doge\Provide\CryptsyMarket;
+use \Groff\Doge\ApiFactory;
+
+/** @var \Groff\Doge\Provide\CryptsyMarket $api */
+$api = ApiFactory::get("cryptsy");
 
 $alarms = Setting::get("alarms");
+$donationAddress = Setting::get("site.donation_address");
+//$donations = $api->getAddressAmount();
+$donations = $api->getReceivedAt($donationAddress);
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -28,6 +36,16 @@ $alarms = Setting::get("alarms");
                 <h1><a href="#top">DogeTrader</a></h1>
             </li>
         </ul>
+
+        <section class="top-bar-section">
+            <ul class="left">
+                <li>
+                    <a href="javascript:void(0);" id="donateButton">
+                        Total Donations: <?php o($donations); ?> DOGE
+                    </a>
+                </li>
+            </ul>
+        </section>
 
         <section class="top-bar-section">
             <!-- Right Nav Section -->
@@ -290,6 +308,12 @@ $alarms = Setting::get("alarms");
 
 
         <p>
+            <a href="http://www.dogedoor.net/" target="_blank">DogeDoor</a>
+            <br>
+            An index/webportal of everything doge. They are especially awesome since they're the first site I know of
+            that links to DogeTrader :)
+        </p>
+        <p>
             <a href="http://dogepay.com/" target="_blank">DogePay</a>
             <br>
             Great conversion tool which also includes price graphs.
@@ -313,6 +337,14 @@ $alarms = Setting::get("alarms");
         <h3>
             Updates
         </h3>
+
+        <h6 class="light small underlined">Feb 17, 2014</h6>
+        <p>
+            Over the weekend you may have noticed the graph was messed up a bit, showing a value of 0 Satochi from cryptsy.
+            I believe this error is because cryptsy fails to respond under heavy load, and in absence of a valid response
+            my sloppy code records this as a value of zero. Rather than fix my sloppy code I wrote some new code to fix
+            those base entries by averaging the value before and after. The graph should be more consistent now.
+        </p>
 
         <h6 class="light small underlined">Feb 13, 2014</h6>
         <p>
@@ -363,11 +395,13 @@ $alarms = Setting::get("alarms");
 </div>
 
 <div id="donations" class="comic">
-    Such Donations: DLHK5ra1F2gqyLRbjoASWXZCfVLX8PVViq
+    Such Donations:
+    <?php o($donationAddress) ?>
+
 </div>
 
 <div id="errorModal" class="reveal-modal small" data-reveal>
-    <h3 class="errorTitle">Wow. Such Error. Very Problem.</h3>
+    <h3 class="errorTitle" id="errorTitle">Wow. Such Error. Very Problem.</h3>
 
     <p id="errorContent">
 

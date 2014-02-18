@@ -11,8 +11,16 @@
         "old_rates_url" : "http://api.bitcoincharts.com/v1/weighted_prices.json",
         "rates_url"     : "https://coinbase.com/api/v1/currencies/exchange_rates",
 
+        "address" : {
+            "received_url": "http://dogechain.info/chain/Dogecoin/q/getreceivedbyaddress/"
+        },
+
         "rates_cache_minutes" : 10,
         "orderbook_count"     : 35
+    },
+
+    "site" : {
+        "donation_address" : "DLHK5ra1F2gqyLRbjoASWXZCfVLX8PVViq"
     },
 
     "cache" : {

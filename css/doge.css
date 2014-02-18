@@ -252,6 +252,12 @@ div.row.smallTable.added.small{
     background-color: #d1fbcb;
 }
 
+#donateButton{
+    font-size: 70%;
+    color: #979797;
+
+}
+
 div.changeBtc{
     font-weight: bold;
     font-size:100%;

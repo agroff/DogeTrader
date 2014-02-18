@@ -39,8 +39,10 @@ doge.utils = {
         return value * multiplier;
     },
 
-    error : function (message) {
+    error : function (message, title) {
+        var t = title || 'Wow. Such Error. Very Problem.';
         $("#errorContent").html(message);
+        $("#errorTitle").html(t);
         $('#errorModal').foundation('reveal', 'open');
     },
 

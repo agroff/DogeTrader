@@ -68,11 +68,9 @@ doge.graph = {
 
 
         if(mins % updateMins == 0){
-            dbg("updating!");
             doge.graph.update();
         }
         else {
-            dbg("no update needed");
         }
         setTimeout(doge.graph.doUpdates, ms);
     },

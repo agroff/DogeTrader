@@ -172,6 +172,15 @@ class CryptsyMarket implements ProviderInterface
         return $newArray;
     }
 
+    public function getReceivedAt($address)
+    {
+        $url = Setting::get("api.address.received_url").$address;
+
+        $result = $this->fetchUrl($url, 60 * 60);
+//        dbg($result);
+        return number_format($result->value);
+    }
+
     public function all($time)
     {
         $cacheTime = Setting::get("cache.keep_time");
@@ -264,6 +273,7 @@ class CryptsyMarket implements ProviderInterface
         $isBuy  = $url === Setting::get("api.buy_orders_url");
         $isSell = $url === Setting::get("api.sell_orders_url");
         $isRates = $url === Setting::get("api.rates_url");
+        $isReceivedValue  = strpos($url, Setting::get("api.address.received_url")) !== FALSE;
 
 
         if($isBuy || $isSell){
@@ -276,6 +286,13 @@ class CryptsyMarket implements ProviderInterface
             }
 
             $data->aaData = array_slice($data->aaData, 0, $orderbookCount);
+            $data = json_encode($data);
+        }
+
+        if($isReceivedValue){
+            $data = array(
+                "value" => $data
+            );
             $data = json_encode($data);
         }
 

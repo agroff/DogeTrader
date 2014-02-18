@@ -72,4 +72,22 @@ doge.settingsLoaded = function () {
 
     doge.loadData();
     doge.applyLoadedData();
+
+    $("#donateButton").click(function(){
+        var msg = "",
+            title = "Donations. Much Appreciate.";
+
+        msg += "Donation address can be copied below. Send lots of doge and watch the total donation count increase. ";
+        msg += "It may take up to an hour to show your contribution. <br /><br /> "
+        msg += "Wow. Such fun. So rich. Very thanks<br /><br />"
+        msg += "Address Here: <br />"
+        msg += "<textarea id=\"donationTextArea\">"
+        msg += doge.settings.site.donation_address;
+        msg += "</textarea>"
+        doge.utils.error(msg, title);
+        setTimeout(function(){
+            $("#donationTextArea").select();
+        }, 1000)
+
+    });
 };
