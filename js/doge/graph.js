@@ -117,28 +117,44 @@ doge.graph = {
         return line;
     },
 
-    getDomain : function (dataSet) {
-        var domain = [], val;
+    getDomain : function (dataSet, isMc) {
+        var domain = [],
+            mc = isMc || false,
+            padding = 4,
+            val;
+
         val = d3.min(dataSet, function (c) {
-            return c.value;
+            return parseFloat(c.value);
         });
 
-        domain.push(val - 5);
+        val -= padding;
+        if(!mc){
+            val -= padding;
+        }
+        domain.push(val);
 
         val = d3.max(dataSet, function (c) {
-            return c.value;
+            return parseFloat(c.value);
         });
 
         //lovely to int hack
-        domain.push((val - 0) + 5);
+        val = val - 0;
+
+        val += padding;
+        if(mc){
+            val += padding
+        }
+
+        domain.push(val);
 
 
+        dbg(domain);
         return domain;
     },
 
     mergeDomains : function (one, two) {
-        var domainOne = doge.graph.getDomain(one),
-            domainTwo = doge.graph.getDomain(two),
+        var domainOne = doge.graph.getDomain(one, true),
+            domainTwo = doge.graph.getDomain(two, true),
             newDomain = [];
         newDomain[0] = domainOne[0];
         newDomain[1] = domainOne[1];
