@@ -1,4 +1,4 @@
-
+<?php $symbol = \Groff\Doge\Setting::coin("symbol"); ?>
 <table class="large-18">
     <tr>
         <th colspan="2" data-content="title"></th>
@@ -16,11 +16,11 @@
         <td data-content="btcTotal"></td>
     </tr>
     <tr>
-        <td class="strong">Average DOGE</td>
+        <td class="strong">Average <?php o($symbol); ?></td>
         <td data-content="dogeAverage"></td>
     </tr>
     <tr>
-        <td class="strong">Total DOGE</td>
+        <td class="strong">Total <?php o($symbol); ?></td>
         <td data-content="dogeTotal"></td>
     </tr>
 </table>

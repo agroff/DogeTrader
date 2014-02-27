@@ -22,6 +22,8 @@ doge.calc = {
 
         sellReport.gained = utils.round(sellReport.gained, 6)
         sellReport.gainPercent = utils.round(sellReport.gainPercent, 2)
+        sellReport.dogeGain = utils.round(doge.convert.btcToDoge(sellReport.gained), 1);
+        sellReport.usdGain = utils.round(doge.convert.btcToFiat("USD", sellReport.gained), 4)
 
         $("#sellReport").loadTemplate($("#sellReportTemplate"), sellReport);
     },

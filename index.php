@@ -187,7 +187,7 @@ $ucCoinName = ucfirst($coinName);
 
                 <div class="row collapse">
                     <div class="small-6 columns">
-                        <span class="prefix">DOGE</span>
+                        <span class="prefix"><?php o($symbol) ?></span>
                     </div>
                     <div class="small-12 columns">
                         <input type="text" id="buyDoge" value="10000">
@@ -218,7 +218,7 @@ $ucCoinName = ucfirst($coinName);
 
                     <div class="row smallTable strong">
                         <div class="small-5 columns">
-                            Doge
+                            <?php o($ucCoinName); ?>
                         </div>
                         <div class="small-4 columns">
                             Sat.
@@ -249,7 +249,7 @@ $ucCoinName = ucfirst($coinName);
                 <h5>
                     Sell
                     <span id="dogeBought"></span>
-                    DOGE at
+                    <?php o($symbol); ?> at
                 </h5>
 
                 <div class="row collapse">
@@ -261,7 +261,7 @@ $ucCoinName = ucfirst($coinName);
                     </div>
                 </div>
 
-                <div class="panel" id="sellReport">
+                <div class="panel tablePanel" id="sellReport">
                     Sell Report...
                 </div>
 

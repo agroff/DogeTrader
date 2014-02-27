@@ -234,6 +234,7 @@ doge.graph = {
 
     render : function (data) {
 
+        var hasVos = doge.settings.coin.graph.hasVos;
 
         // define dimensions of graph
         var m = [10, 80, 80, 80]; // margins
@@ -325,12 +326,15 @@ doge.graph = {
 
         doge.graph.textY += 22;
 
-        var vosFocus = doge.graph.addDot(graph, "vos"),
-            cryptsyFocus = doge.graph.addDot(graph, "cryptsy"),
+        var cryptsyFocus = doge.graph.addDot(graph, "cryptsy"),
             coinbaseFocus = doge.graph.addDot(graph, "coinbase"),
             cryptsyText = doge.graph.addText(rect, "cryptsy"),
-            vosText = doge.graph.addText(rect, "vos"),
             coinbaseText = doge.graph.addText(rect, "coinbase");
+
+        if(hasVos){
+            var vosFocus = doge.graph.addDot(graph, "vos"),
+                vosText = doge.graph.addText(rect, "vos");
+        }
 
         graph.append("rect")
             .attr("class", "overlay")
@@ -339,12 +343,16 @@ doge.graph = {
             .on("mouseover", function () {
                 rect.style("display", null);
                 coinbaseFocus.style("display", null);
-                vosFocus.style("display", null);
+                if(hasVos){
+                    vosFocus.style("display", null);
+                }
                 cryptsyFocus.style("display", null);
             })
             .on("mouseout", function () {
                 rect.style("display", "none");
-                vosFocus.style("display", "none");
+                if(hasVos){
+                    vosFocus.style("display", "none");
+                }
                 coinbaseFocus.style("display", "none");
                 cryptsyFocus.style("display", "none");
             })
@@ -352,24 +360,27 @@ doge.graph = {
 
         function mousemove() {
             var x0 = x.invert(d3.mouse(this)[0]),
-                i = bisectDate(vos, x0, 1),
-                d0 = vos[i - 1],
-                d1 = vos[i],
+                i = bisectDate(cryptsy, x0, 1),
+                d0 = cryptsy[i - 1],
+                d1 = cryptsy[i],
                 i = x0 - d0.time > d1.time - x0 ? i : i - 1,
-                vosPrice = vos[i],
+                vosPrice = vos[i] || 0,
                 cryptsyPrice = cryptsy[i],
                 coinbasePrice = coinbase[i];
 
-            var xPos = (x(vosPrice.time) + 10);
+            var xPos = (x(cryptsyPrice.time) + 10);
             if( (xPos + rectWidth) > w){
                 xPos -= rectWidth;
                 xPos -= 20;
             }
 
-            dateText.text(formatDate(vosPrice.time));
+            dateText.text(formatDate(cryptsyPrice.time));
             rect.attr("transform", "translate(" + xPos + "," + 5 + ")");
-            vosFocus.attr("transform", "translate(" + x(vosPrice.time) + "," + usdY(vosPrice.value) + ")");
-            vosText.text(vosPrice.value + " MilliCents");
+
+            if(hasVos){
+                vosFocus.attr("transform", "translate(" + x(vosPrice.time) + "," + usdY(vosPrice.value) + ")");
+                vosText.text(vosPrice.value + " MilliCents");
+            }
 
             coinbaseFocus.attr("transform", "translate(" + x(coinbasePrice.time) + "," + usdY(coinbasePrice.value) + ")");
             coinbaseText.text(coinbasePrice.value + " MilliCents");

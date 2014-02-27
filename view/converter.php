@@ -1,3 +1,6 @@
+<?php $symbol = \Groff\Doge\Setting::coin("symbol");
+$sign = $symbol[0];
+?>
 <a name="converter" class="linkMarker">&nbsp;</a>
 
 
@@ -18,7 +21,7 @@
 
                 <div class="row collapse">
                     <div class="large-6 columns">
-                        <span class="prefix">DOGE</span>
+                        <span class="prefix"><?php o($symbol); ?></span>
                     </div>
                     <div class="large-12 columns">
                         <input type="text" placeholder="Enter DOGE Amount" value="100000" id="convertDoge">
@@ -33,13 +36,13 @@
                 <div class="row collapse">
 
                     <div class="small-6 columns">
-                        <button type="button" data-value="10000" class="small-14 small radius button doge-convert">&#393;10,000</button>
+                        <button type="button" data-value="10000" class="small-14 small radius button doge-convert"><?php o($sign) ?>10,000</button>
                     </div>
                     <div class="small-6 columns">
-                        <button type="button" data-value="100000" class="small-14 small radius button doge-convert">&#393;100,000</button>
+                        <button type="button" data-value="100000" class="small-14 small radius button doge-convert"><?php o($sign) ?>100,000</button>
                     </div>
                     <div class="small-6 columns">
-                        <button type="button" data-value="1000000" class="small-14 small radius button doge-convert">&#393;1,000,000</button>
+                        <button type="button" data-value="1000000" class="small-14 small radius button doge-convert"><?php o($sign) ?>1,000,000</button>
                     </div>
                 </div>
 

@@ -17,6 +17,7 @@ doge.main = function () {
 
     $.get(settingsUrl, function (settings) {
         doge.settings = settings;
+        doge.settings.coin = settings.coins[$("body").attr("data-coin")]
         doge.settingsLoaded();
     }, "json");
 
@@ -82,7 +83,7 @@ doge.settingsLoaded = function () {
         msg += "Wow. Such fun. So rich. Very thanks<br /><br />"
         msg += "Address Here: <br />"
         msg += "<textarea id=\"donationTextArea\">"
-        msg += doge.settings.site.donation_address;
+        msg += doge.settings.coin.donation_address;
         msg += "</textarea>"
         doge.utils.error(msg, title);
         setTimeout(function(){
