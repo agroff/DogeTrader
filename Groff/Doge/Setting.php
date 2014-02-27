@@ -18,6 +18,13 @@ class Setting
         return $settings;
     }
 
+    public static function coin($setting = ""){
+        if($setting != ""){
+            $setting = ".".$setting;
+        }
+        return self::get("coins.".CURRENT_COIN.$setting);
+    }
+
     public static function get($setting)
     {
         $settings = self::getSettings();

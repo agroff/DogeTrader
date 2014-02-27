@@ -5,7 +5,9 @@
  * Author:  andy
  * Created: 1/24/14 4:42 PM
  */
-interface ProviderInterface {
+interface MarketInterface {
     public function last();
     public function orders();
-} 
+    public function all($time);
+    public function price();
+}

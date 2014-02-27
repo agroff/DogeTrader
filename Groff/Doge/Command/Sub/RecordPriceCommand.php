@@ -33,13 +33,18 @@ class RecordPriceCommand extends Command
             $this->output("Modulus not zero: " . $mins % $settingTime);
             return;
         }
-        /** @var CryptsyMarket $api */
-        $api = ApiFactory::get("cryptsy");
 
-        $satoshi  = $api->cryptsyPrice();
-        $realUsd  = $api->vosPrice();
-        $btcToUsd = $api->btcToUsd();
-        $usd       = ($satoshi * $btcToUsd) / 100000000;
+        $coin = Setting::coin();
+
+
+        /** @var CryptsyMarket $api */
+        $cryptsy = ApiFactory::market("cryptsy", $coin);
+        $rates   = ApiFactory::rates("coinbase");
+
+        $satoshi  = $cryptsy->price();
+        $btcToUsd = $rates->btcToUsd();
+
+        $usd = ($satoshi * $btcToUsd) / 100000000;
         $usd = intval($usd  * 100000);
         $time = sqlDate("now");
 
@@ -61,15 +66,21 @@ class RecordPriceCommand extends Command
 
         $price->save();
 
-        $price = ORM::for_table('price')->create();
+        $realUsd = "";
+        if(Setting::coin("graph.hasVos"))
+        {
+            $vos = ApiFactory::market("vos", $coin);
+            $realUsd  = $vos->price();
 
-        $price->type = "usd";
-        $price->source = "vos";
-        $price->value = $realUsd;
-        $price->time = $time;
+            $price = ORM::for_table('price')->create();
 
-        $price->save();
+            $price->type = "usd";
+            $price->source = "vos";
+            $price->value = $realUsd;
+            $price->time = $time;
 
+            $price->save();
+        }
 
         $this->output("Satoshi: " . $satoshi);
         $this->output("BTC: " . $btcToUsd );

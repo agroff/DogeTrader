@@ -4,13 +4,18 @@ use \Groff\Doge\Setting;
 use \Groff\Doge\Provide\CryptsyMarket;
 use \Groff\Doge\ApiFactory;
 
-/** @var \Groff\Doge\Provide\CryptsyMarket $api */
-$api = ApiFactory::get("cryptsy");
+/** @var \Groff\Doge\Provide\BlockChainInterface $blockChain */
+$blockChain = ApiFactory::blockChain(CURRENT_COIN);
 
 $alarms = Setting::get("alarms");
-$donationAddress = Setting::get("site.donation_address");
-//$donations = $api->getAddressAmount();
-$donations = $api->getReceivedAt($donationAddress);
+
+$donationAddress = Setting::coin("donation_address");
+$donations = $blockChain->receivedAt($donationAddress);
+
+
+$coinName = Setting::coin("name");
+$symbol = Setting::coin("symbol");
+$ucCoinName = ucfirst($coinName);
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -18,14 +23,15 @@ $donations = $api->getReceivedAt($donationAddress);
     <meta charset="utf-12"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description"
-          content="Get up to date prices on dogecoin, monitor market changes in real time, convert doge to USD, GBP, and EUR at Doge Trader. To the moon!">
-    <title>DogeTrader | wow </title>
-    <link rel="icon" type="img/ico" href="/img/doge.png">
+          content="Get up to date prices on <?php o($coinName); ?>coin, monitor market changes in real time, convert <?php
+          o($coinName); ?> to USD, GBP, and EUR at <?php o($ucCoinName); ?> Trader. To the moon!">
+    <title><?php o($ucCoinName); ?>Trader | wow </title>
+    <link rel="icon" type="img/ico" href="/img/<?php o($coinName); ?>-logo.png">
     <link rel="stylesheet" href="css/foundation.css"/>
     <link rel="stylesheet" href="css/doge.css"/>
     <script src="js/vendor/modernizr.js"></script>
 </head>
-<body>
+<body class="<?php o($coinName); ?>" data-coin="<?php o($coinName); ?>">
 
 <a name="top" class="">&nbsp;</a>
 
@@ -33,7 +39,7 @@ $donations = $api->getReceivedAt($donationAddress);
     <nav class="top-bar" data-topbar>
         <ul class="title-area">
             <li class="name">
-                <h1><a href="#top">DogeTrader</a></h1>
+                <h1><a href="#top"><?php o($ucCoinName); ?>Trader</a></h1>
             </li>
         </ul>
 
@@ -41,7 +47,7 @@ $donations = $api->getReceivedAt($donationAddress);
             <ul class="left">
                 <li>
                     <a href="javascript:void(0);" id="donateButton">
-                        Total Donations: <?php o($donations); ?> DOGE
+                        Total Donations: <?php o($donations); ?> <?php o($symbol); ?>
                     </a>
                 </li>
             </ul>
@@ -67,14 +73,14 @@ $donations = $api->getReceivedAt($donationAddress);
 
 <div class="row">
     <div class="large-6 columns small-centered center">
-        <img src="/img/doge.png" alt="Dogecoin Logo" class="dogeCoin">
+        <img src="/img/<?php o($coinName); ?>-logo.png" alt="Dogecoin Logo" class="dogeCoin">
 
         <h1>
-            Doge Trader
+            <?php o($ucCoinName); ?> Trader
         </h1>
 
-        <p class="doge">
-            A collection of utilities for trading doge.
+        <p class="dogeText">
+            A collection of utilities for trading <?php o($coinName); ?>.
             <br>
             All market data is from Cryptsy
         </p>
@@ -97,7 +103,7 @@ $donations = $api->getReceivedAt($donationAddress);
             <div id="currentPrice">
                 ...
             </div>
-            <div class="center doge">Satoshi</div>
+            <div class="center dogeText">Satoshi</div>
         </div>
     </div>
     <div class="large-13 columns">
@@ -306,31 +312,8 @@ $donations = $api->getReceivedAt($donationAddress);
             Awesome Links
         </h3>
 
+        <?php view($coinName . "/links") ?>
 
-        <p>
-            <a href="http://www.dogedoor.net/" target="_blank">DogeDoor</a>
-            <br>
-            An index/webportal of everything doge. They are especially awesome since they're the first site I know of
-            that links to DogeTrader :)
-        </p>
-        <p>
-            <a href="http://dogepay.com/" target="_blank">DogePay</a>
-            <br>
-            Great conversion tool which also includes price graphs.
-        </p>
-
-        <p>
-            <a href="http://doge.yottabyte.nu/" target="_blank">Doge.Yottabyte</a>
-            <br>
-            Great price monitor application with live charts and multiple exchanges.
-        </p>
-
-        <p>
-            <a href="http://bitcoinwisdom.com/markets/cryptsy/dogebtc" target="_blank">Bitcoin Wisdom - Doge/Cryptsy</a>
-            <br>
-            The most detailed and insightful doge trading monitor. I made dogetrader since I don't understand all that
-            fancy stuff.
-        </p>
     </div>
     <div class="large-9 columns">
 
@@ -338,54 +321,19 @@ $donations = $api->getReceivedAt($donationAddress);
             Updates
         </h3>
 
-        <h6 class="light small underlined">Feb 17, 2014</h6>
-        <p>
-            Over the weekend you may have noticed the graph was messed up a bit, showing a value of 0 Satochi from cryptsy.
-            I believe this error is because cryptsy fails to respond under heavy load, and in absence of a valid response
-            my sloppy code records this as a value of zero. Rather than fix my sloppy code I wrote some new code to fix
-            those base entries by averaging the value before and after. The graph should be more consistent now.
-        </p>
-
-        <h6 class="light small underlined">Feb 13, 2014</h6>
-        <p>
-            The historical graph of price in satoshi and two different measures of USD has been added. A feature to
-            select the time range was also added. Only a day and a half of data is available at this point so older
-            reports won't be complete.
-        </p>
-
-        <h6 class="light small underlined">Feb 10, 2014</h6>
-
-        <p>
-            Today I switched the fiat conversions from using bitcoin charts to using coinbase. Coinbase is more
-            expensive
-            generally but at least they're reliable. I noticed bitcoin charts was pricing 1 BTC at 87 USD which is just
-            ridiculous since the actual price was closer $650. I thought their weighted average would provide a good and
-            stable exchange agnostic price, but I was so very wrong. I highly recommend not using their API for
-            anything.
-        </p>
-
-        <p>
-            Today I will also begin storing data for the first time in this site's history. I plan to store the price of
-            doge
-            in both satoshi and USD and eventually provide a graph of both prices. The recent fluctuations in BTC to
-            fiat
-            are making it more difficult to determine the true direction of DOGE as compared to fiat so I feel this
-            feature
-            is necessary.
-        </p>
-
-        <p>
-            Some other ideas: I want to add a section with mining/halving data. I'm considering getting data from other
-            exchanges, especially vault of satoshi for direct DOGE/USD data. I am also considering text to speech
-            monitoring
-            of the order book and change log. I also want volume in the form of BTC per 5 minutes, with alarms for high
-            volumes. If any of those sound important to you let me know and there's a higher chance I'll get around to
-            them. Doge tips also effect my motivation.
-        </p>
+        <?php view($coinName . "/updates") ?>
 
     </div>
 </div>
 
+<br>
+<br>
+<br>
+<div class="center dogetrader-family">
+    <a href="http://mint.dogetrader.co">MintTrader</a>
+    <span> | </span>
+    <a href="http://dogetrader.co">DogeTrader</a>
+</div>
 
 <img id="rocket" class="celebrate" src="/img/rocket-doge.gif">
 <img id="mooon" class="celebrate" src="/img/moon.png">
@@ -393,6 +341,7 @@ $donations = $api->getReceivedAt($donationAddress);
 <div id="bottomSpacer">
     &nbsp;
 </div>
+
 
 <div id="donations" class="comic">
     Such Donations:

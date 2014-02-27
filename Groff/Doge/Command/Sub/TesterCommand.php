@@ -25,6 +25,9 @@ class TesterCommand extends Command
      */
     function main()
     {
+        cdbg("Total Rows:");
+        cdbg(\ORM::for_table('price')->count());
+
         $name = $this->option("name");
         echo "Hello, $name! \n";
         return 0;

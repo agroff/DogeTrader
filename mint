@@ -1,6 +1,7 @@
 #!/usr/bin/env php
 <?php
 
+DEFINE("CURRENT_COIN", 'mint');
 
 $_SERVER["DOCUMENT_ROOT"] = __DIR__;
 

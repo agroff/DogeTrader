@@ -45,6 +45,11 @@ body.space span.prefix
     color: #CCC;
 }
 
+body.mint .dogeText{
+    color:#2EB93C;
+}
+
+
 .row{
     max-width: 73.5em;
 }
@@ -71,7 +76,7 @@ body.space span.prefix
     font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
-.doge {
+.dogeText{
     text-transform: lowercase;
     font-family: "Comic Sans MS", cursive, sans-serif;
     color: #f35536;
@@ -81,6 +86,13 @@ body.space span.prefix
     padding: 4px;
 }
 
+.dogetrader-family a,
+.dogetrader-family span
+{
+    display: inline-block;
+    margin-left:20px;
+}
+
 .button,
 .button.tiny,
 .button.small
@@ -88,6 +100,25 @@ body.space span.prefix
     font-family: "Comic Sans MS", cursive, sans-serif;
     border: 1px solid rgb(138, 105, 69);
     padding: 7px 12px;
+}
+
+body.mint .button,
+body.mint .button.tiny,
+body.mint .button.small
+{
+    border: 1px solid #012906;
+    background-color: #356F3A;
+}
+
+body.mint a {
+    color: #037411;
+}
+body.mint a.button {
+    color: #FFF;
+}
+
+body.mint .graphToggle.vos{
+    display: none;
 }
 
 #sellReport p{

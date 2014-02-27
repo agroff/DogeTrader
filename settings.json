@@ -1,4 +1,30 @@
 {
+    "coins" : {
+        "doge" : {
+            "name": "doge",
+            "symbol": "DOGE",
+            "database": "doge_trader",
+            "cryptsy_id" : "132",
+            "market_cache" : "4",
+            "graph": {
+                "hasVos" : true
+            },
+            "donation_address": "DLHK5ra1F2gqyLRbjoASWXZCfVLX8PVViq"
+        },
+        "mint" : {
+            "name": "mint",
+            "symbol": "MINT",
+            "database": "mint_trader",
+            "cryptsy_id" : "156",
+            "market_cache" : "8",
+            "graph": {
+                "hasVos" : false
+            },
+            "donation_address": "MZMs8iCC7ex1aVGMZWTNkwM8F6RdT8NBuB",
+            "donation_address": "Mijc2FNr52unf3BZNKngng7k1fWWwjBDJL"
+        }
+    },
+
     "api" : {
         "url"             : "/api.php",
         "refresh_time"    : 4,

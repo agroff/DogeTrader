@@ -1,20 +1,28 @@
 <?php
 
 define("DOC_ROOT", $_SERVER["DOCUMENT_ROOT"]);
+define("ABOVE_ROOT", preg_replace("/[-_a-zA-Z]+\\/?$/", "", DOC_ROOT));
 
 require_once(DOC_ROOT . "/vendor/autoload.php");
 
 use \Groff\Doge\Setting;
 
-$settingsFile = DOC_ROOT . "/../update/settings.php";
+$settingsFile = ABOVE_ROOT . "/update/settings.php";
+
+//echo DOC_ROOT . "\n";
+//echo ABOVE_ROOT . "\n";
 
 if(file_exists($settingsFile)){
     require_once($settingsFile);
 }
 
+if(!defined("CURRENT_COIN")) {
+    define("CURRENT_COIN", 'doge');
+}
+
 
 $host = Setting::get("database.host");
-$name = Setting::get("database.name");
+$name = Setting::coin("database");
 
 $username = Setting::get("database.username");
 if(defined("MYSQL_USERNAME")){

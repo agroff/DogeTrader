@@ -4,8 +4,12 @@ use Groff\Utils\Input;
 use Groff\Doge\Setting;
 use Groff\Doge\ApiFactory;
 
-/** @var \Groff\Doge\Provide\CryptsyMarket $api */
-$api = ApiFactory::get("cryptsy");
+$coin = Setting::coin();
+
+/** @var \Groff\Doge\Provide\MarketInterface $market */
+$market = ApiFactory::market("cryptsy", $coin);
+$rates = ApiFactory::rates("coinbase");
+$graph = ApiFactory::graph($coin);
 
 $method = Input::get("method");
 $time = Input::get("time");
@@ -14,23 +18,23 @@ $days = Input::get("days");
 switch($method)
 {
     case "last":
-        echo $api->last();
+        echo $market->last();
         break;
 
     case "rates":
-        echo $api->rates();
+        echo $rates->rates();
         break;
 
     case "all":
-        echo $api->all($time);
+        echo $market->all($time);
         break;
 
     case "graph":
-        echo $api->graph($days);
+        echo $graph->graph($days);
         break;
 
     case "orders":
-        $api->orders();
+        $market->orders();
         break;
 }
 
