@@ -13,8 +13,8 @@ if(!isset($fullHeader)){
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description"
           content="Get up to date prices on <?php o($coinName); ?>coin, monitor market changes in real time, convert <?php
-          o($coinName); ?> to USD, GBP, and EUR at <?php o($ucCoinName); ?> Trader. To the moon!">
-    <title><?php o($ucCoinName); ?>Trader | wow </title>
+          o($coinName); ?> to USD, GBP, and EUR at <?php o($ucCoinName); ?> Trader.">
+    <title><?php o($ucCoinName); ?>Trader</title>
     <link rel="icon" type="img/ico" href="/img/<?php o($coinName); ?>-logo.png">
     <link rel="stylesheet" href="css/foundation.css"/>
     <link rel="stylesheet" href="css/doge.css"/>

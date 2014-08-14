@@ -39,11 +39,29 @@ doge.utils = {
         return value * multiplier;
     },
 
+    ucfirst : function (str) {
+        //  discuss at: http://phpjs.org/functions/ucfirst/
+        // original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+        // bugfixed by: Onno Marsman
+        // improved by: Brett Zamir (http://brett-zamir.me)
+        //   example 1: ucfirst('kevin van zonneveld');
+        //   returns 1: 'Kevin van zonneveld'
+
+        str += '';
+        var f = str.charAt(0)
+            .toUpperCase();
+        return f + str.substr(1);
+    },
+
     error : function (message, title) {
         var t = title || 'Wow. Such Error. Very Problem.';
         $("#errorContent").html(message);
         $("#errorTitle").html(t);
         $('#errorModal').foundation('reveal', 'open');
+    },
+
+    getCoin : function(){
+        return $("body").attr("data-coin");
     },
 
     minutesAgo : function (date, hideSeconds) {
@@ -84,17 +102,15 @@ doge.utils = {
 
     fixDate: function(d, hours){
         var offset = d.getTimezoneOffset() / 60,
-            hours = hours || 4;
-        d.setHours(d.getHours() + hours - offset);
+            hours = hours || 0;
+        d.setHours(d.getHours() - offset);
         return d;
     },
 
     fixCryptsyDate : function (cryptsyDate) {
-        dbg(cryptsyDate)
         var d = new Date(cryptsyDate * 1000);
 
-        return doge.utils.fixDate(d);
-        //return "<br />" + d.toTimeString() + " <br /> " + cryptsyDate;
+        return d;
     },
 
     formatManyDoge : function (doge) {

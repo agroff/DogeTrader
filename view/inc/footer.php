@@ -2,6 +2,9 @@
 <br>
 <br>
 <div class="center dogetrader-family">
+
+    <a href="http://reddtrader.com">ReddTrader</a>
+    <span> | </span>
     <a href="http://mint.dogetrader.co">MintTrader</a>
     <span> | </span>
     <a href="http://dogetrader.co">DogeTrader</a>

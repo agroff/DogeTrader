@@ -148,7 +148,6 @@ doge.graph = {
         domain.push(val);
 
 
-        dbg(domain);
         return domain;
     },
 
@@ -172,7 +171,7 @@ doge.graph = {
     fixDate : function (data, parseDate) {
         $.each(data, function (i, item) {
             var time = parseDate(item.time);
-            time = doge.utils.fixDate(time, 8);
+            time = doge.utils.fixDate(time, 0);
             data[i]["time"] = time;
         });
 

@@ -192,7 +192,7 @@
         </h3>
 
         <p>
-            DogeTrader takes data from various exchanges and displays it in a (hopefully) useful way. It also offers a utility
+            <?php o($ucCoinName); ?>Trader takes data from various exchanges and displays it in a (hopefully) useful way. It also offers a utility
             to convert to USD/GBP/CAD/EUR, alarms at specified prices, and calculations of your gain/loss at various
             price points.
         </p>
@@ -206,9 +206,8 @@
         </p>
 
         <p>
-            Donations are happily accepted. Donation address appears during moon celebrations. Moon celebrations and
-            alarms will play sound and you can't stop it (sorry). If you really want it to go away, try refreshing the
-            page.
+            Donations are happily accepted. You can find the donation address in the top bar. Alarms will play sound
+            and you can't stop it (sorry). If you really want it to go away, try refreshing the page.
         </p>
 
         <p>

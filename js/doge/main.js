@@ -74,11 +74,12 @@ doge.initialRequest = function() {
 doge.common = function(){
     $("#donateButton").click(function(){
         var msg = "",
-            title = "Donations. Much Appreciate.";
+            title = "Donations Always Appreciated!",
+            coin = doge.utils.getCoin();
 
-        msg += "Donation address can be copied below. Send lots of doge and watch the total donation count increase. ";
+        msg += "Donation address can be copied below. Send lots of " + coin + " and watch the total donation count increase. ";
         msg += "It may take up to an hour to show your contribution. <br /><br /> "
-        msg += "Wow. Such fun. So rich. Very thanks<br /><br />"
+        msg += "Thanks a bunch!<br /><br />"
         msg += "Address Here: <br />"
         msg += "<textarea id=\"donationTextArea\">"
         msg += doge.settings.coin.donation_address;

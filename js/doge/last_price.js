@@ -36,11 +36,13 @@ doge.lastPrice = {
     },
 
     render : function (transactions) {
-        var lastPrice = doge.lastPrice.calculate(transactions);
+        var utils = doge.utils,
+            lastPrice = doge.lastPrice.calculate(transactions),
+            coin = utils.ucfirst(utils.getCoin());
 
         doge.data.currentPrice = lastPrice;
 
-        document.title = lastPrice + " Sat. DogeTrader | wow";
+        document.title = lastPrice + " Sat. "+coin+"Trader";
 
         this.trigger(lastPrice);
 

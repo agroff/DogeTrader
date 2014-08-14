@@ -2,6 +2,7 @@
 
 define("DOC_ROOT", $_SERVER["DOCUMENT_ROOT"]);
 define("ABOVE_ROOT", preg_replace("/[-_a-zA-Z]+\\/?$/", "", DOC_ROOT));
+date_default_timezone_set('UTC');
 
 require_once(DOC_ROOT . "/vendor/autoload.php");
 

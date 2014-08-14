@@ -149,7 +149,7 @@ class CryptsyMarket extends Cacheable implements MarketInterface
                 "price" => $trade[2],
                 "total" => $trade[4],
                 "amount" => $trade[3],
-                "time" => strtotime($trade[0]),
+                "time" => strtotime($trade[0]) + (60 * 60 * 4),
             );
 
         }
