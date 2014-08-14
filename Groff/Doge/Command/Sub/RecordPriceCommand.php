@@ -42,6 +42,7 @@ class RecordPriceCommand extends Command
         $rates   = ApiFactory::rates("coinbase");
 
         $satoshi  = $cryptsy->price();
+
         $btcToUsd = $rates->btcToUsd();
 
         $usd = ($satoshi * $btcToUsd) / 100000000;

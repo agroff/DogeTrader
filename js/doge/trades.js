@@ -129,7 +129,8 @@ doge.trades = {
 
     renderAnalysis : function (transactionData) {
         var $buy = $("#buyContainer"),
-            $sell = $("#sellContainer"),
+            $selretype18
+        l = $("#sellContainer"),
             buys = doge.trades.buys,
             sells = doge.trades.sells,
             buyTotal = doge.trades.buys.btcTotal,

@@ -61,8 +61,8 @@ class CryptsyMarket extends Cacheable implements MarketInterface
     {
         $url = $this->url("trades");
         $trades = $this->fetchUrl($url, 60);
-        $first = array_shift($trades->aaData);
-        $btc = $first[2];
+        $first = array_shift($trades);
+        $btc = $first->price;
         list($zero, $satoshi) = explode('.', $btc);
         $satoshi = intval($satoshi);
         return $satoshi;
