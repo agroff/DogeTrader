@@ -21,6 +21,17 @@
                 "hasVos" : false
             },
             "donation_address": "MZMs8iCC7ex1aVGMZWTNkwM8F6RdT8NBuB"
+        },
+        "redd" : {
+            "name": "redd",
+            "symbol": "RDD",
+            "database": "redd_trader",
+            "cryptsy_id" : "169",
+            "market_cache" : "8",
+            "graph": {
+                "hasVos" : false
+            },
+            "donation_address": "RbxtFYm33XoJMq8CJhBTAUAHcXMfGatSVe"
         }
     },
 
@@ -41,7 +52,8 @@
         },
 
         "rates_cache_minutes" : 10,
-        "orderbook_count"     : 35
+        "orderbook_count"     : 35,
+        "overview_cache"      : 300
     },
 
     "site" : {

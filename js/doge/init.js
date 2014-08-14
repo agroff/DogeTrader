@@ -5,11 +5,12 @@ function dbg(variable) {
 doge = {};
 
 doge.data = {
-    currentPrice : "",
-    analyzeCount : 200,
-    changeLog    : [],
-    buys         : [],
-    alarms       : []
+    currentMarket : "Cryptsy",
+    currentPrice  : "",
+    analyzeCount  : 200,
+    changeLog     : [],
+    buys          : [],
+    alarms        : []
 }
 
 /*

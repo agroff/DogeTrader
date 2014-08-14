@@ -1,3 +1,36 @@
+////script to check poloniex is up.
+////in a new tab of chrome, open the doge market.
+////right click, inspect element, go to console
+//// paste this script and press enter
+//
+////warning: when  it goes up, you'll place a doge buy order at 2 satoshi and then get rickrolled.
+//(function(){
+//    var url = 'https://www.poloniex.com/private.php?currencyPair=BTC_DOGE&rate=0.00000002&amount=100&command=buy',
+//
+//        secondsToCheck = 15,
+//        count = 0,
+//
+//        check = function(){
+//
+//            count++;
+//
+//            $.get(url, function(data){
+//
+//                if(data === "<p>This market is frozen.</p>") {
+//                    console.log("still frozen. Try number " + count);
+//                    setTimeout(check, secondsToCheck * 1000);
+//                }
+//                else {
+//                    window.location='https://www.youtube.com/watch?v=oHg5SJYRHA0';
+//                }
+//            })
+//        }
+//
+//    check();
+//
+//})()
+
+
 /******************************************
  * Alarm
  ******************************************/

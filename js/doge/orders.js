@@ -138,14 +138,14 @@ doge.orders = {
             cost = 0;
 
         $.each(data, function (i, item) {
-            var total = utils.preciseRound(item[2], 3),
-                satoshi = utils.btcToSatoshi(item[0]);
+            var total = utils.preciseRound(item.btc, 3),
+                satoshi = utils.btcToSatoshi(item.price);
 
             cost += utils.toNumber(total);
 
             formatted[satoshi] = {
                 satoshi : satoshi,
-                doge    : utils.formatManyDoge(item[1]),
+                doge    : utils.formatManyDoge(item.count),
                 total   : total,
                 cost    : utils.preciseRound(cost, 1)
             };

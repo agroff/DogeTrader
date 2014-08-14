@@ -39,6 +39,16 @@ doge.api.last = function (callback) {
     });
 };
 
+doge.api.clear = function () {
+    doge.api.lastTime = 0;
+    doge.orders.past.buys = [];
+    doge.orders.past.sells = [];
+    $("#currentPrice").html("...");
+    $("#buyOrderList").html("");
+    $("#sellOrderList").html("");
+    $("#topTrades").html("");
+};
+
 doge.api.rates = function () {
     doge.api.getMethod("rates", function (data) {
         doge.convert.rates = data;
@@ -49,17 +59,17 @@ doge.api.distributeResponse = function (response) {
     doge.api.lastTime = response.time;
 
     if(response.trades !== false){
-        doge.lastPrice.render(response.trades.aaData);
-        doge.trades.analyze(response.trades.aaData);
+        doge.lastPrice.render(response.trades);
+        doge.trades.analyze(response.trades);
         doge.lastPrice.rendered = true;
     }
 
     if(response.sells !== false){
-        doge.orders.render.sells(response.sells.aaData);
+        doge.orders.render.sells(response.sells.orders);
     }
 
     if(response.buys !== false){
-        doge.orders.render.buys(response.buys.aaData);
+        doge.orders.render.buys(response.buys.orders);
     }
 };
 
@@ -67,7 +77,8 @@ doge.api.refresh = function () {
     var timer = 1000 * doge.settings.api.refresh_time,
         data = {
             time   : doge.api.lastTime,
-            method : "all"
+            method : "all",
+            market : doge.data.currentMarket
         };
 
     doge.api.getMethod(data, function (data) {

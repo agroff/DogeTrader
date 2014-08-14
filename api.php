@@ -6,8 +6,10 @@ use Groff\Doge\ApiFactory;
 
 $coin = Setting::coin();
 
+$requestedMarket = strtolower(Input::get("market"));
+
 /** @var \Groff\Doge\Provide\MarketInterface $market */
-$market = ApiFactory::market("cryptsy", $coin);
+$market = ApiFactory::market($requestedMarket, $coin);
 $rates = ApiFactory::rates("coinbase");
 $graph = ApiFactory::graph($coin);
 
@@ -35,6 +37,11 @@ switch($method)
 
     case "orders":
         $market->orders();
+        break;
+
+    case "checkTrade":
+        $arb = new \Groff\Doge\Market\Arbitrage();
+        echo json_encode( $arb->checkTrade(Input::get("currency"), Input::get("buy"), Input::get("sell")) );
         break;
 }
 

@@ -84,13 +84,14 @@ doge.utils = {
 
     fixDate: function(d, hours){
         var offset = d.getTimezoneOffset() / 60,
-            hours = hours || 5;
+            hours = hours || 4;
         d.setHours(d.getHours() + hours - offset);
         return d;
     },
 
     fixCryptsyDate : function (cryptsyDate) {
-        var d = new Date(cryptsyDate);
+        dbg(cryptsyDate)
+        var d = new Date(cryptsyDate * 1000);
 
         return doge.utils.fixDate(d);
         //return "<br />" + d.toTimeString() + " <br /> " + cryptsyDate;
@@ -111,11 +112,11 @@ doge.utils = {
             round = utils.round,
             display = display || false,
             formatted = {
-                date    : trade[0],
-                type    : trade[1],
-                satoshi : toSat(trade[2]),
-                doge    : num(trade[3]),
-                btc     : num(trade[4])
+                date    : trade.time,
+                type    : trade.type,
+                satoshi : toSat(trade.price),
+                doge    : num(trade.amount),
+                btc     : num(trade.total)
             };
 
         if (display) {

@@ -18,7 +18,8 @@ doge.main = function () {
     $.get(settingsUrl, function (settings) {
         doge.settings = settings;
         doge.settings.coin = settings.coins[$("body").attr("data-coin")]
-        doge.settingsLoaded();
+        doge.common();
+        doge.controller();
     }, "json");
 
     $("#moon-button").click(function () {
@@ -41,16 +42,24 @@ doge.initialRequestFinished = function(){
     $("#convertDoge").trigger("keyup");
 };
 
+doge.setMarket = function(){
+    $("#currentMarket").text(doge.data.currentMarket);
+}
+
 doge.applyLoadedData = function(){
     doge.alarm.render();
     $("#analyzeCount").val(doge.data.analyzeCount);
     doge.orders.renderLog();
-
+    doge.setMarket();
 };
 
 doge.initialRequest = function() {
 
-    doge.api.getMethod("all", function (data) {
+    var data = {
+        method : "all",
+        market : doge.data.currentMarket
+    };
+    doge.api.getMethod(data, function (data) {
         doge.api.distributeResponse(data);
         doge.initialRequestFinished();
 
@@ -62,18 +71,7 @@ doge.initialRequest = function() {
 
 };
 
-doge.settingsLoaded = function () {
-    doge.initialRequest();
-    doge.convert.bind();
-    doge.calc.bind();
-    doge.alarm.bind();
-    doge.graph.fetch();
-    doge.trades.bind();
-    doge.api.rates();
-
-    doge.loadData();
-    doge.applyLoadedData();
-
+doge.common = function(){
     $("#donateButton").click(function(){
         var msg = "",
             title = "Donations. Much Appreciate.";
@@ -91,4 +89,47 @@ doge.settingsLoaded = function () {
         }, 1000)
 
     });
+
+    $("a", "#selectMarket").click(function(){
+        var market = $.trim($(this).text());
+        doge.data.currentMarket = market;
+        doge.storeData();
+        doge.setMarket();
+        doge.api.clear();
+        doge.api.refresh();
+    });
+}
+
+doge.settingsLoaded = function () {
+
+    doge.convert.bind();
+    doge.calc.bind();
+    doge.alarm.bind();
+    doge.graph.fetch();
+    doge.trades.bind();
+    doge.api.rates();
+
+    doge.loadData();
+    doge.applyLoadedData();
+    doge.initialRequest();
+
 };
+
+
+
+doge.controller = function(){
+    var uri = window.location.pathname.substr(1);
+    switch (uri){
+        case "arbitrage":
+            doge.arbitrage.bind();
+            break;
+        default:
+            doge.settingsLoaded();
+            break;
+    }
+};
+
+
+
+
+//hi

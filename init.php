@@ -21,6 +21,34 @@ if(!defined("CURRENT_COIN")) {
 }
 
 
+// php returns the error code two when trying to call a method without enough arguments.
+// We'll define that here to help avoid magic numbers in the code.
+define("DOGE_ERROR_ARGUMENTS", 2);
+
+//We can use these constants to switch between development and production settings.
+define("ENVIRONMENT", "development");
+//define("ENVIRONMENT", "production");
+
+include(DOC_ROOT . "/helpers/global.php");
+
+function exception_handler($exception)
+{
+    ob_end_clean();
+    //logError($exception);
+    showError($exception);
+    exit();
+}
+
+function error_handler($errno, $errstr, $errfile, $errline)
+{
+    throw new Exception($errstr, $errno);
+}
+
+set_error_handler("error_handler", E_ALL);
+set_exception_handler('exception_handler');
+
+
+
 $host = Setting::get("database.host");
 $name = Setting::coin("database");
 
@@ -33,50 +61,3 @@ ORM::configure('mysql:host=' . $host . ';dbname=' . $name);
 ORM::configure('username', $username);
 ORM::configure('password', MYSQL_PASSWORD);
 
-
-function o($output)
-{
-    echo htmlentities($output);
-}
-
-function cdbg($item){
-
-    if(is_array($item) || is_object($item))
-    {
-        return print_r($item);
-    }
-
-    echo $item . "\n";
-}
-function dbg($item)
-{
-    echo "<pre>";
-    var_dump($item);
-    echo "</pre>";
-}
-
-function require_js($file)
-{
-    require(DOC_ROOT . '/js/' . $file);
-}
-
-function view($file, $data = array())
-{
-    extract($data);
-    require(DOC_ROOT . '/view/' . $file . '.php');
-}
-
-function sqlDate($date = 'now')
-{
-    $time = strtotime($date);
-    return date('Y-m-d H:i:s', $time);
-}
-
-function template($id)
-{
-
-    echo '<script type="text/html" id="'.$id.'">';
-    view("template/" . $id);
-    echo '</script>';
-
-}

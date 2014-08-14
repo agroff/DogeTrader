@@ -3,11 +3,14 @@
 use Groff\Doge\Provide\BlockChainInterface;
 use Groff\Doge\Provide\CoinbaseRates;
 use Groff\Doge\Provide\CryptsyMarket;
+use Groff\Doge\Provide\MintpalMarket;
+use Groff\Doge\Provide\PoloniexMarket;
 use Groff\Doge\Provide\VosMarket;
 use Groff\Doge\Provide\DogeBlockChain;
 use Groff\Doge\Provide\LocalGraph;
 use Groff\Doge\Provide\MarketInterface;
 use Groff\Doge\Provide\MintBlockChain;
+use Groff\Doge\Provide\ReddBlockChain;
 
 /**
  * Project: dogewatch
@@ -29,6 +32,10 @@ class ApiFactory {
         {
             case "cryptsy":
                 return new CryptsyMarket($coin);
+            case "mintpal":
+                return new MintpalMarket($coin);
+            case "poloniex":
+                return new PoloniexMarket($coin);
             case "vos":
                 return new VosMarket($coin);
         }
@@ -71,6 +78,8 @@ class ApiFactory {
                 return new DogeBlockChain();
             case 'mint':
                 return new MintBlockChain();
+            case 'redd':
+                return new ReddBlockChain();
         }
         return FALSE;
     }

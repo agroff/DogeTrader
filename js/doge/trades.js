@@ -50,9 +50,9 @@ doge.trades = {
         $.each(transactionData, function (i, trade) {
 
             if (i == 0) {
-                doge.trades.endDate = trade[0];
+                doge.trades.endDate = trade.time;
             }
-            doge.trades.startDate = trade[0];
+            doge.trades.startDate = trade.time;
 
             trade = doge.utils.formatTrade(trade);
 
@@ -105,7 +105,7 @@ doge.trades = {
     renderTopTrades : function (transactionData) {
         var formatted = [];
         transactionData.sort(function (a, b) {
-            return doge.utils.toNumber(b[4]) - doge.utils.toNumber(a[4]);
+            return doge.utils.toNumber(b.total) - doge.utils.toNumber(a.total);
         });
 
         transactionData.splice(5, 200);

@@ -49,6 +49,15 @@ body.mint .dogeText{
     color:#2EB93C;
 }
 
+body.redd .dogeText{
+    font-family: "Open Sans", arial, sans-serif;
+    color: #ed1c24;
+}
+
+body.redd{
+    font-family: "Open Sans", arial, sans-serif;
+}
+
 
 .row{
     max-width: 73.5em;
@@ -106,8 +115,18 @@ body.mint .button,
 body.mint .button.tiny,
 body.mint .button.small
 {
+    font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
     border: 1px solid #012906;
     background-color: #356F3A;
+}
+
+body.redd .button,
+body.redd .button.tiny,
+body.redd .button.small
+{
+    font-family: "Open Sans", arial, sans-serif;
+    border: 1px solid #8B0B07;
+    background-color: #C72821;
 }
 
 body.mint a {
@@ -117,6 +136,16 @@ body.mint a.button {
     color: #FFF;
 }
 
+body.redd a {
+    color: #ed1c24;
+}
+body.redd a.button {
+    color: #FFF;
+}
+
+body.redd #moon-button,
+body.mint #moon-button,
+body.redd .graphToggle.vos,
 body.mint .graphToggle.vos{
     display: none;
 }

@@ -13,7 +13,7 @@ doge.lastPrice = {
             total = 0,
             satoshi, btc;
         for (var i = 0; i < averageAmount; i++) {
-            btc = transactions[i][2];
+            btc = transactions[i].price;
             satoshi = doge.utils.btcToSatoshi(btc)
             total += satoshi;
         }

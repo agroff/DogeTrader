@@ -38,6 +38,6 @@ class VosMarket extends Cacheable implements MarketInterface{
         $url = Setting::get("api.vos_trades_url");
         $orders = $this->fetchUrl($url, 60);
         $buy = $orders->data->bids[0];
-        return $buy->price->value_int;
+        return $buy->price->value_int / 1000;
     }
 }

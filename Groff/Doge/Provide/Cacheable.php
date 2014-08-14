@@ -124,7 +124,10 @@ class Cacheable {
             if($data !== FALSE)
             {
                 $data = json_decode($data);
-                $data->cached = true;
+                if(is_object($data))
+                {
+                    $data->cached = true;
+                }
                 return $data;
             }
         }
