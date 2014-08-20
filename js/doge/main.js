@@ -63,9 +63,11 @@ doge.initialRequest = function() {
         doge.api.distributeResponse(data);
         doge.initialRequestFinished();
 
+        setInterval(doge.api.ensureUpdates, 8000);
+
         setTimeout(function(){
             doge.api.refresh();
-        }, 3000)
+        }, 3000);
 
     });
 

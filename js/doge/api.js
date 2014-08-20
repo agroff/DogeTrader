@@ -4,6 +4,7 @@
 doge.api = {};
 
 doge.api.lastTime = 0;
+doge.api.lastRefreshed = 0;
 
 doge.api.getMethod = function (method, callback) {
     var url = doge.settings.api.url,
@@ -73,6 +74,17 @@ doge.api.distributeResponse = function (response) {
     }
 };
 
+doge.api.ensureUpdates = function () {
+    var now = new Date().getTime(),
+        secondsSinceUpdate = (now - doge.api.lastRefreshed) / 1000;
+    dbg("seconds since refresh: " + secondsSinceUpdate);
+
+    if(secondsSinceUpdate > 45){
+        dbg("Rebooting auto-update!");
+        doge.api.refresh();
+    }
+};
+
 doge.api.refresh = function () {
     var timer = 1000 * doge.settings.api.refresh_time,
         data = {
@@ -82,6 +94,8 @@ doge.api.refresh = function () {
         };
 
     doge.api.getMethod(data, function (data) {
+
+        doge.api.lastRefreshed =  new Date().getTime();
 
         doge.api.distributeResponse(data);
         setTimeout(function () {

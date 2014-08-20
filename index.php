@@ -1,6 +1,10 @@
 <?php
 require_once("init.php");
 
+if($_SERVER["SERVER_NAME"] === 'http://redd.dogetrader.co'){
+    header("Location: http://reddtrader.com");
+}
+
 use Groff\Doge\Controller;
 
 ob_start();

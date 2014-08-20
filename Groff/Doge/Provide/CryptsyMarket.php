@@ -143,6 +143,10 @@ class CryptsyMarket extends Cacheable implements MarketInterface
         $newData = array();
         $data = json_decode($data, true);
 
+        if(!$data){
+            return json_encode(array(false));
+        }
+
         foreach ($data["aaData"] as $trade) {
             $newData[] = array(
                 "type" => $trade[1],

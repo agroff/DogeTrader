@@ -7,7 +7,7 @@ use Groff\Doge\ApiFactory;
 $coin = Setting::coin();
 
 $requestedMarket = strtolower(Input::get("market"));
-
+//<<<<
 /** @var \Groff\Doge\Provide\MarketInterface $market */
 $market = ApiFactory::market($requestedMarket, $coin);
 $rates = ApiFactory::rates("coinbase");
