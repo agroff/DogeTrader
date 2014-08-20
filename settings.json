@@ -80,7 +80,7 @@
     },
 
     "orders" : {
-        "change_threshold" : 2.6,
+        "change_threshold" : 1,
         "record_count"     : 140
     },
 
