@@ -13,6 +13,16 @@ class BlockChain extends Cacheable{
 
     protected $lastAddress;
 
+    public function address($address)
+    {
+        $data = array(
+            "balance" => 0,
+            "receivedAt" => $this->receivedAt($address),
+        );
+
+        return json_encode($data);
+    }
+
     public function receivedAt($address)
     {
         $this->lastAddress = $address;
@@ -33,7 +43,7 @@ class BlockChain extends Cacheable{
         return $data;
     }
 
-    private function url($key)
+    protected function url($key)
     {
         return $this->urls[$key] . $this->lastAddress;
     }

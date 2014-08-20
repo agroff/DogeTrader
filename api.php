@@ -12,10 +12,12 @@ $requestedMarket = strtolower(Input::get("market"));
 $market = ApiFactory::market($requestedMarket, $coin);
 $rates = ApiFactory::rates("coinbase");
 $graph = ApiFactory::graph($coin);
+$blockChain = ApiFactory::blockChain($coin["name"]);
 
 $method = Input::get("method");
 $time = Input::get("time");
 $days = Input::get("days");
+$address= Input::get("address");
 
 switch($method)
 {
@@ -37,6 +39,10 @@ switch($method)
 
     case "orders":
         $market->orders();
+        break;
+
+    case "address":
+        echo $blockChain->address($address);
         break;
 
     case "checkTrade":

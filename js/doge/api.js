@@ -79,7 +79,7 @@ doge.api.ensureUpdates = function () {
         secondsSinceUpdate = (now - doge.api.lastRefreshed) / 1000;
     dbg("seconds since refresh: " + secondsSinceUpdate);
 
-    if(secondsSinceUpdate > 45){
+    if(secondsSinceUpdate > 28){
         dbg("Rebooting auto-update!");
         doge.api.refresh();
     }
