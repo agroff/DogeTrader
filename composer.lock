@@ -11,12 +11,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/agroff/Command.git",
-                "reference": "114f05b2e85258bc6ad01a526ae80a320914eb14"
+                "reference": "24cd66b4c8cd1194b6521ece58ea3a02530cf3f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/agroff/Command/zipball/114f05b2e85258bc6ad01a526ae80a320914eb14",
-                "reference": "114f05b2e85258bc6ad01a526ae80a320914eb14",
+                "url": "https://api.github.com/repos/agroff/Command/zipball/24cd66b4c8cd1194b6521ece58ea3a02530cf3f6",
+                "reference": "24cd66b4c8cd1194b6521ece58ea3a02530cf3f6",
                 "shasum": ""
             },
             "require": {
@@ -46,7 +46,7 @@
                 "command",
                 "command line"
             ],
-            "time": "2014-02-10 21:45:53"
+            "time": "2014-02-11 11:33:42"
         },
         {
             "name": "j4mie/idiorm",
@@ -54,12 +54,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/j4mie/idiorm.git",
-                "reference": "11e964157a6a2c6128a0546673ad5e99ac1a62cd"
+                "reference": "b0922d8719a94e3a0e0e4a0ca3876f4f91475dcf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/j4mie/idiorm/zipball/11e964157a6a2c6128a0546673ad5e99ac1a62cd",
-                "reference": "11e964157a6a2c6128a0546673ad5e99ac1a62cd",
+                "url": "https://api.github.com/repos/j4mie/idiorm/zipball/b0922d8719a94e3a0e0e4a0ca3876f4f91475dcf",
+                "reference": "b0922d8719a94e3a0e0e4a0ca3876f4f91475dcf",
                 "shasum": ""
             },
             "require": {
@@ -104,7 +104,7 @@
                 "orm",
                 "query builder"
             ],
-            "time": "2013-12-12 10:25:27"
+            "time": "2014-06-23 13:08:57"
         }
     ],
     "packages-dev": [
