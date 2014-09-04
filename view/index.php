@@ -230,6 +230,40 @@
 
         <?php view($coinName . "/updates") ?>
 
+        <div class="row">
+            <div class="large-18 columns">
+                <h3 id="settings">
+                    Settings
+                </h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-13 columns">
+                <p>
+                        Change Log Threshold
+                    <span class="light small ">
+                        - Determines the smallest changes to appear in the change log
+                    </span>
+                </p>
+            </div>
+            <div class="large-5 columns">
+                <select id="changeLogThreshold" class="small-18">
+                    <option value="0">No Minimum</option>
+                    <option value="0.1">0.1 BTC</option>
+                    <option value="0.3">0.3 BTC</option>
+                    <option value="0.5">0.5 BTC</option>
+                    <option value="0.7">0.7 BTC</option>
+                    <option value="1">1.0 BTC</option>
+                    <option value="1.5">1.5 BTC</option>
+                    <option value="2">2.0 BTC</option>
+                    <option value="2.5">2.5 BTC</option>
+                    <option value="3">3.0 BTC</option>
+                    <option value="4">4.0 BTC</option>
+                    <option value="5">5.0 BTC</option>
+                </select>
+            </div>
+        </div>
+
     </div>
 </div>
 
@@ -241,6 +275,7 @@
 <?php template("alarmTemplate") ?>
 <?php template("orderTemplate") ?>
 <?php template("changeTemplate") ?>
+<?php template("satoshiChangeTemplate") ?>
 <?php template("currencyTemplate") ?>
 <?php template("triggeredAlarmTemplate") ?>
 <?php template("sellReportTemplate") ?>

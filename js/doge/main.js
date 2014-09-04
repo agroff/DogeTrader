@@ -46,11 +46,27 @@ doge.setMarket = function(){
     $("#currentMarket").text(doge.data.currentMarket);
 }
 
+doge.applySettings = function(){
+    if(doge.data.changeLogThreshold === undefined){
+        doge.data.changeLogThreshold = doge.settings.orders.change_threshold;
+    }
+    else {
+        doge.settings.orders.change_threshold = doge.data.changeLogThreshold;
+    }
+    $("#changeLogThreshold").val(doge.data.changeLogThreshold);
+    $("#changeLogThreshold").change(function(){
+        doge.data.changeLogThreshold = $(this).val();
+        doge.settings.orders.change_threshold = doge.data.changeLogThreshold;
+        doge.storeData();
+    });
+};
+
 doge.applyLoadedData = function(){
     doge.alarm.render();
     $("#analyzeCount").val(doge.data.analyzeCount);
     doge.orders.renderLog();
     doge.setMarket();
+    doge.applySettings();
 };
 
 doge.initialRequest = function() {
@@ -109,6 +125,7 @@ doge.settingsLoaded = function () {
     doge.calc.bind();
     doge.alarm.bind();
     doge.graph.fetch();
+    doge.orders.bind();
     doge.trades.bind();
     doge.api.rates();
 

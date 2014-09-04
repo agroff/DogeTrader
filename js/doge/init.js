@@ -9,6 +9,10 @@ doge.data = {
     currentPrice  : "",
     analyzeCount  : 200,
     changeLog     : [],
+    orderLog      : {
+        buys : {},
+        sells : {}
+    },
     buys          : [],
     alarms        : []
 }

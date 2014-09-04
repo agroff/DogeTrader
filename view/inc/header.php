@@ -71,6 +71,8 @@ if(!isset($fullHeader)){
                 <li><a href="#converter">Converter</a></li>
                 <li class="divider"></li>
                 <li><a href="#about">About</a></li>
+                <li class="divider"></li>
+                <li><a href="#settings">Settings</a></li>
             </ul>
 
         </section>

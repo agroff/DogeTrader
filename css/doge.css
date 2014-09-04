@@ -58,6 +58,10 @@ body.redd{
     font-family: "Open Sans", arial, sans-serif;
 }
 
+#buyOrderList div.row,
+#sellOrderList div.row{
+    cursor: pointer;
+}
 
 .row{
     max-width: 73.5em;

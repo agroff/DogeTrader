@@ -30,21 +30,27 @@ doge.orders = {
 
         change = toNum(order.total) - toNum(orders[index][satoshi].total);
 
-        change = doge.utils.preciseRound(change, 1);
+        if(change < 1){
+            change = doge.utils.preciseRound(change, 3);
+        }
+        else {
+            change = doge.utils.preciseRound(change, 2);
+        }
+
 
         return change;
     },
 
     getChange : function (order, isBuy) {
         var clss = "red",
-            change = doge.orders.changeFromIndex(0, order, isBuy);
-        ;
+            change = doge.orders.changeFromIndex(0, order, isBuy),
+            number = doge.utils.toNumber(change);
 
-        if (change > 0) {
+        if (number > 0) {
             clss = "green";
             change = "+" + change;
         }
-        if (change == 0) {
+        if (number == 0) {
             change = "--";
             clss = "";
         }
@@ -72,44 +78,88 @@ doge.orders = {
         });
     },
 
-    logChange : function (satoshi, btc) {
+    ensureOrderBookProperty : function (satoshi, type) {
+        if(!doge.data.orderLog){
+            doge.data.orderLog = {
+                buys : {},
+                sells : {}
+            };
+        }
+        if(!doge.data.orderLog[type]){
+            doge.data.orderLog[type] = {};
+        }
+        if(!doge.data.orderLog[type][satoshi]){
+            doge.data.orderLog[type][satoshi] = [];
+        }
+    },
+
+    logOrderBookChange : function (change) {
+        var log;
+        doge.orders.ensureOrderBookProperty(change.satoshi, change.type);
+
+        log = doge.data.orderLog[change.type][change.satoshi];
+
+        log.push(change);
+        if (log.length > 50) {
+            log.shift();
+        }
+    },
+
+    logMainChange : function (change) {
+        doge.data.changeLog.push(change);
+
+        if (doge.data.changeLog.length > doge.settings.orders.record_count) {
+            doge.data.changeLog.shift();
+        }
+    },
+
+    logChange : function (satoshi, btc, isBuy, isNotable) {
         var data = {
                 satoshi : satoshi,
                 btc     : Math.abs(btc),
+                type    : "buys",
                 date    : doge.utils.minutesAgo(new Date(), false)
             };
+
+        if(!isBuy){
+            data.type = "sells";
+        }
 
         data.english = "removed";
         if (btc > 0) {
             data.english = "added";
         }
 
-        doge.data.changeLog.push(data);
-
-        if (doge.data.changeLog.length > doge.settings.orders.record_count) {
-            doge.data.changeLog.shift();
+        if(data.btc < 1){
+            data.btc = '.' + data.btc.toString().split(".")[1];
         }
 
-        doge.storeData();
-
-        doge.orders.renderLog();
+        doge.orders.logOrderBookChange(data);
+        if(isNotable){
+            doge.orders.logMainChange(data)
+        }
     },
 
     logNotableChange : function (order, isBuy) {
-        var change, index;
+        var isNotable = false,
+            change, index;
 
         if (isBuy) {
             index = doge.orders.past.buys.length - 1;
         }
         else {
-            index = doge.orders.past.buys.length - 1;
+            index = doge.orders.past.sells.length - 1;
         }
 
         change = doge.orders.changeFromIndex(index, order, isBuy);
-        ;
 
-        if (Math.abs(change) >= doge.settings.orders.change_threshold) {
-            doge.orders.logChange(order.satoshi, change);
+        dbg(doge.settings.orders.change_threshold);
+        if (Math.abs(change) > doge.settings.orders.change_threshold) {
+            isNotable = true;
+        }
+
+        if(Math.abs(change) > 0){
+            doge.orders.logChange(order.satoshi, change, isBuy, isNotable);
         }
     },
 
@@ -129,7 +179,51 @@ doge.orders = {
             item.change = doge.orders.getChange(item, isBuy);
             doge.orders.logNotableChange(item, isBuy);
             orderBook.loadTemplate($("#orderTemplate"), item, options);
-        })
+        });
+
+
+        doge.storeData();
+
+        doge.orders.renderLog();
+
+        dbg(doge.data.orderLog);
+    },
+
+    satoshiPopup : function($row, type){
+        var satoshi = $("div:first-child", $row).text(),
+            msg = "",
+            log,
+            $log,
+            title = satoshi + " Satoshi Log";
+
+        msg += "<div id=\"satoshiLog\" class=\"panel tablePanel\"></div>";
+        doge.utils.error(msg, title);
+
+        doge.orders.ensureOrderBookProperty(satoshi, type);
+
+        log = doge.data.orderLog[type][satoshi];
+
+
+        $log = $("#satoshiLog");
+        $.each(log, function (i, data) {
+            var size = 'big';
+            if (data.btc < 16) {
+                size = 'medium'
+            }
+            if (data.btc < 6) {
+                size = 'small'
+            }
+
+            data.class = "row smallTable " + data.english + " " + size;
+
+            $log.loadTemplate($("#satoshiChangeTemplate"), data, {prepend : true});
+        });
+
+        if(log.length === 0){
+            $log.html('<h5>No changes.</h5>')
+        }
+
+
     },
 
     formatOrderList : function (data) {
@@ -162,6 +256,15 @@ doge.orders = {
         if (past[type].length > 10) {
             past[type].shift();
         }
+    },
+
+    bind: function(){
+        $("#buyOrderList").on("click", '.smallTable', function(){
+            doge.orders.satoshiPopup($(this), "buys");
+        });
+        $("#sellOrderList").on("click", '.smallTable', function(){
+            doge.orders.satoshiPopup($(this), "sells");
+        });
     },
 
     render : {
